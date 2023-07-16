@@ -12,6 +12,10 @@ import {UserListPage} from "./pages/user/userList/userList.component";
 import {UserProfilePage} from "./pages/user/userProfile/userProfile.component";
 import { ModalComponent } from './components/modal/modal.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { StoreModule } from '@ngrx/store';
+import {counterReducer} from './../ngRx/counter.reducer';
+import { MyCounterComponent } from './components/my-counter/my-counter.component';
+import { ButtonComponent } from './components/button/button.component'
 
 @NgModule({
   declarations: [
@@ -25,11 +29,14 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     UserListPage,
     UserProfilePage,
     ModalComponent,
-    NavigationComponent
+    NavigationComponent,
+    MyCounterComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({count: counterReducer}, {})
   ],
   providers: [],
   bootstrap: [AppComponent]
