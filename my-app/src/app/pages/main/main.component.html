@@ -2,4 +2,5 @@
   <h1 class="font-bold mb-2 text-center text-lg mt-4">{{title | titlecase }}</h1>
   <p class="font-bold mb-2 text-center mt-4">Hello everybody!</p>
   <app-my-counter></app-my-counter>
+  <app-button (btnClick)="healthCheck()" text="Health Check" [isDisabled]="false"></app-button>
 </div>
