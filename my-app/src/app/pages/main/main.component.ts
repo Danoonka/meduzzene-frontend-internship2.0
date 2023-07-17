@@ -1,4 +1,5 @@
 import {Component} from '@angular/core'
+import { healthcheckEffects } from 'src/ngRx/healthcheck.effects';
 import {environment} from "../../../environments/environments";
 
 @Component({
@@ -7,4 +8,11 @@ import {environment} from "../../../environments/environments";
 })
 export class MainPage{
   title = environment.title;
+  
+  constructor() {
+  }
+
+  healthCheck() {
+    healthcheckEffects()
+  }
 }
