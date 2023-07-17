@@ -1,0 +1,9 @@
+
+<div class="text-center">
+  <div>Current Count: {{ count$ | async }}</div>
+  <div class="flex mx-auto justify-between w-[500px] my-[20px]">
+    <app-button (btnClick)="increment()" text="Increment" [isDisabled]="false"></app-button>
+    <app-button (btnClick)="decrement()" text="Decrement" [isDisabled]="false"></app-button>
+    <app-button (btnClick)="reset()" text="Reset Counter" [isDisabled]="false"></app-button>
+  </div>
+</div>
