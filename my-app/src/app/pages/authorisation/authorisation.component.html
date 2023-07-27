@@ -1,1 +1,26 @@
-<h2 class="font-bold mb-2 text-center text-lg mt-4">{{title | titlecase }}</h2>
+<div class="border-radius-[20px] w-[500px] border-[#f039b1] border-[1px] rounded-md mx-auto my-[50px] bg-[#f039b1]-100"
+     style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+  <h2 class="font-bold mb-2 text-center text-lg mt-4 text-[#f039b1]">Login</h2>
+  <div class="card-body" class="p-[20px]">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <ng-container *ngFor="let field of authorizationFields">
+        <app-input
+          [label]="field.label"
+          [control]="form.get(field.name)"
+          [type]="field.type"
+        ></app-input>
+      </ng-container>
+      <div class="flex justify-around">
+        <app-button
+          class="bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+          style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"
+          [isDisabled]="loading" btnClick="onSubmit()" text="Login"></app-button>
+        <app-button
+          class="bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+          style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);" [isDisabled]="loading" (click)="LoginWithAuth()"
+          text="Login with Auth">
+        </app-button>
+      </div>
+    </form>
+  </div>
+</div>
