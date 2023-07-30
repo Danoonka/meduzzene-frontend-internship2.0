@@ -12,6 +12,13 @@ export interface User {
   user_links: string[];
 }
 
+export interface UserForList {
+  user_id: number;
+  user_avatar: string;
+  user_firstname: string;
+  user_lastname: string;
+}
+
 export const initialCurrentUserState: User = {
   user_id: -1,
   user_email: '',
@@ -26,7 +33,25 @@ export const initialCurrentUserState: User = {
   ]
 };
 
+export interface userToEdit {
+  user_firstname: string,
+  user_lastname: string,
+  user_avatar: string | null,
+  user_status: string,
+  user_city: string,
+  user_phone: number
+}
+
+export interface PaginationInfoState {
+  current_page: number,
+  total_page: number,
+  total_results: number
+}
+
 
 export const userAuthorized = createAction('[User] Authorized');
 export const userUnAuthorized = createAction('[User] userUnAuthorized');
-export const setUser = createAction('[User] Set User', props<{ user: User }>());
+export const setUser = createAction('[User] Set User', props<{ user: User | null }>());
+export const setUserList = createAction('[Users] Set Users List', props<{ users: UserForList[] }>())
+export const setUserById = createAction('[User] Set User By Id', props<{ userById: User }>())
+export const setPagination = createAction('pagination', props<{ pagination: PaginationInfoState }>())
