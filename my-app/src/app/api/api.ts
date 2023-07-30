@@ -1,5 +1,6 @@
 import axios, {AxiosInstance, AxiosRequestConfig} from "axios";
 import {environment} from "src/environments/environments";
+import {User, userToEdit} from "../../ngRx/user.actions";
 
 
 export const instance: AxiosInstance = axios.create({
@@ -37,3 +38,36 @@ export const checkAuth = () => {
 export const SignUp = (user) => {
   return instance.post('/users/', {...user})
 };
+
+export const pagination = (item: string, page?: number, size?: number) => {
+  return instance.get(`/${item}/`, {
+    params: {
+      page: page,
+      page_size: size
+    }
+  });
+};
+
+export const getUserById = (id: number) => {
+  return instance.get(`/users/${id}/`);
+};
+
+export const updateUserInfo = (id: number, user: userToEdit) => {
+  return instance.put(`/users/${id}/`, user);
+};
+
+export const updateUserPassword = (id: number, password: string, new_password: string) => {
+  return instance.put(`/users/${id}/password`, null, {
+    params: {
+      user_password: password,
+      new_password: new_password,
+    },
+  });
+};
+
+
+export const deleteUser = (id: number) => {
+  return instance.delete(`/users/${id}/`);
+};
+
+

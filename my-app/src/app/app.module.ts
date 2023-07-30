@@ -26,6 +26,9 @@ import {ToastrModule} from "ngx-toastr";
 import {provideToastr} from 'ngx-toastr';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { UserItemComponent } from './components/user-item/user-item.component';
+import { UserUpdateModalComponent } from './components/user-update-modal/user-update-modal.component';
+import { EditPasswordModalComponent } from './components/edit-password-modal/edit-password-modal.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MyCounterComponent,
     ButtonComponent,
     InputComponent,
-    CurrentComponent
+    CurrentComponent,
+    UserItemComponent,
+    UserUpdateModalComponent,
+    EditPasswordModalComponent
   ],
   imports: [
     BrowserModule,

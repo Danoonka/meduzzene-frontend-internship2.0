@@ -31,7 +31,7 @@ export class AuthGuard implements CanActivate {
 
               this.router.navigateByUrl(previousUrl);
             } else {
-              this.router.navigate(['/']);
+              // this.router.navigate(['/']);
             }
           }
           return false;
@@ -67,7 +67,7 @@ export class AuthGuardForUnauthorised implements CanActivate {
 
             this.router.navigateByUrl(previousUrl);
           } else {
-            this.router.navigate(['/']);
+            // this.router.navigate(['/']);
           }
           return false;
         }
