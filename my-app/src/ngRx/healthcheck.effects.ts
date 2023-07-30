@@ -39,8 +39,8 @@ export const checkAuthEffects = async (store: Store) => {
     });
 }
 
-export const SignUpEffects = async (email: string, password: string, firstname: string, lastname: string) => {
-  return await SignUp(email, password, firstname, lastname)
+export const SignUpEffects = async (user) => {
+  return await SignUp(user)
     .then(() => {
       return true
     })

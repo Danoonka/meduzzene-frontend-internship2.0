@@ -34,11 +34,6 @@ export const checkAuth = () => {
   return instance.get('/auth/me/');
 };
 
-export const SignUp = (email: string, password: string, firstname: string, lastname: string) => {
-  return instance.post('/users/', {
-    user_email: email,
-    user_password: password,
-    user_firstname: firstname,
-    user_lastname: lastname
-  })
+export const SignUp = (user) => {
+  return instance.post('/users/', {...user})
 };

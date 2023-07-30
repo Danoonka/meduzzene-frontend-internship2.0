@@ -59,6 +59,7 @@ export class RegistrationPage {
       type: 'text',
     },
   ];
+  private user: {};
 
   constructor(
     private formBuilder: FormBuilder,
@@ -100,11 +101,14 @@ export class RegistrationPage {
       return
     }
 
-    if (!await SignUpEffects(
-      this.f["user_email"].value,
-      this.f["user_password"].value,
-      this.f["user_firstname"].value,
-      this.f["user_lastname"].value)) {
+    this.user = {
+      user_email: this.f["user_email"].value,
+      user_password: this.f["user_password"].value,
+      user_firstname: this.f["user_firstname"].value,
+      user_lastname: this.f["user_lastname"].value
+    }
+
+    if (!await SignUpEffects(this.user)) {
       return
     }
 
