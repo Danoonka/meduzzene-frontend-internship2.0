@@ -59,7 +59,6 @@ export const SignUpEffects = async (user: UserToSignUp) => {
     });
 }
 
-
 export const paginationEffects = async (item: string, store: Store, page?: number, size?: number) => {
   return await pagination(item, page, size)
     .then(res => {
