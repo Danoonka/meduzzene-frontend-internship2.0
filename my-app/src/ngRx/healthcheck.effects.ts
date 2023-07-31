@@ -48,6 +48,7 @@ export const checkAuthEffects = async (store: Store) => {
     });
 }
 
+
 export const SignUpEffects = async (user: UserToSignUp) => {
   return await SignUp(user)
     .then(() => {

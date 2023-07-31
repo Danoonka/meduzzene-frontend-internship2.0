@@ -59,6 +59,7 @@ export class RegistrationPage {
       type: 'text',
     },
   ];
+
   private user: UserToSignUp | null = null;
 
   constructor(
