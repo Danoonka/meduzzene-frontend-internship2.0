@@ -1,6 +1,6 @@
 import axios, {AxiosInstance, AxiosRequestConfig} from "axios";
 import {environment} from "src/environments/environments";
-import {User, userToEdit} from "../../ngRx/user.actions";
+import {User, userToEdit, UserToSignUp} from "../../ngRx/user.actions";
 
 
 export const instance: AxiosInstance = axios.create({
@@ -35,7 +35,7 @@ export const checkAuth = () => {
   return instance.get('/auth/me/');
 };
 
-export const SignUp = (user) => {
+export const SignUp = (user: UserToSignUp) => {
   return instance.post('/users/', {...user})
 };
 
