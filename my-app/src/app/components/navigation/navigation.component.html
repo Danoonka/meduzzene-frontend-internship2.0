@@ -1,14 +1,42 @@
-<nav class="absolute, top-0 right-0 left-0 h-[50px] flex justify-between items-center test-white bg-gray-500">
+<nav class="absolute, top-0 right-0 left-0 h-[50px] flex justify-between items-center text-white  bg-[#f039b1]">
   <a routerLink="/"><h1 class="font-bold">Internship Knowledge Control</h1></a>
-  <div class="flex justify-between gap-[10px]">
-    <div>
+  <div class="flex justify-between gap-[30px]">
+    <div *ngIf="!(isAuthorized$ | async)">
       <a routerLink="/about">About</a>
     </div>
-   <div>
-     <a routerLink="/user-list">User list</a>
-   </div>
-    <div>
+    <div *ngIf="(isAuthorized$ | async) as auth">
+      <a routerLink="/user-list">User list</a>
+    </div>
+    <div *ngIf="(isAuthorized$ | async) as auth">
       <a routerLink="/company-list">Company list</a>
     </div>
+  </div>
+  <div class="flex justify-around gap-[10px] mr-[10px]" *ngIf="!(isAuthorized$ | async)">
+    <div>
+      <app-button
+        style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"
+        class="bg-transparent hover:bg-[white] text-[white] font-semibold hover:text-[#e305ad] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+        (btnClick)="goToPage('/user-authorization')"
+        text="Sign in"
+        [isDisabled]="false"></app-button>
+    </div>
+    <div>
+      <app-button
+        style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"
+        class="bg-transparent hover:bg-[white] text-[white] font-semibold hover:text-[#e305ad] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+        (btnClick)="goToPage('/user-registration')"
+        text="Sign up"
+        [isDisabled]="false"></app-button>
+    </div>
+  </div>
+  <div class="flex justify-around gap-[20px] mr-[10px]" *ngIf="(isAuthorized$ | async) as auth">
+    <a routerLink="/user-profile" class="text-[10px]" *ngIf="user$ | async as user">{{user.user_firstname}}
+      <br>{{user.user_lastname}}</a>
+    <app-button
+      style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"
+      class="bg-transparent hover:bg-[white] text-[white] font-semibold hover:text-[#e305ad] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+      (btnClick)="LogOut()"
+      text="Log out"
+      [isDisabled]="false"></app-button>
   </div>
 </nav>
