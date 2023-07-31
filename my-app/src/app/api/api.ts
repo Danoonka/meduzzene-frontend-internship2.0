@@ -35,6 +35,7 @@ export const checkAuth = () => {
   return instance.get('/auth/me/');
 };
 
+
 export const SignUp = (user: UserToSignUp) => {
   return instance.post('/users/', {...user})
 };
