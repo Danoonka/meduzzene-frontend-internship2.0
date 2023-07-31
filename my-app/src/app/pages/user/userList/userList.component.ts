@@ -2,7 +2,7 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {UserState} from '../../../../ngRx/user.reducer';
 import {Observable, Subscription} from 'rxjs';
-import {paginationEffects} from '../../../../ngRx/healthcheck.effects';
+import {paginationForUserListEffects} from '../../../../ngRx/healthcheck.effects';
 import {UserForList} from '../../../../ngRx/user.actions';
 
 @Component({
@@ -33,7 +33,7 @@ export class UserListPage implements OnInit, OnDestroy {
   }
 
   loadPage(page: number) {
-    paginationEffects('users', this.store, page, 15).then((res) => {
+    paginationForUserListEffects(this.store, page, 15).then((res) => {
       this.currentPage = res.pagination.current_page;
       this.totalPages = res.pagination.total_page;
       this.userSubscription = this.users$.subscribe((user) => {
