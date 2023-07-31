@@ -9,7 +9,7 @@ import {
   updateUserInfo, updateUserPassword
 } from "src/app/api/api"
 import {Store} from '@ngrx/store';
-import {setPagination, setUser, setUserById, setUserList, User, userToEdit} from "./user.actions";
+import {setPagination, setUser, setUserById, setUserList, User, userToEdit, UserToSignUp} from "./user.actions";
 
 
 export const healthcheckEffects = () => {
@@ -48,7 +48,7 @@ export const checkAuthEffects = async (store: Store) => {
     });
 }
 
-export const SignUpEffects = async (user) => {
+export const SignUpEffects = async (user: UserToSignUp) => {
   return await SignUp(user)
     .then(() => {
       return true
