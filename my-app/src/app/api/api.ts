@@ -71,5 +71,3 @@ export const deleteUser = (id: number) => {
 };
 
 
-
-
