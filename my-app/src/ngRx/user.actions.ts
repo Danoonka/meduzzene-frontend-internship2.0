@@ -48,6 +48,14 @@ export interface PaginationInfoState {
   total_results: number
 }
 
+export interface UserToSignUp {
+  user_email: string,
+  user_password: string,
+  user_firstname: string,
+  user_lastname: string
+
+}
+
 
 export const userAuthorized = createAction('[User] Authorized');
 export const userUnAuthorized = createAction('[User] userUnAuthorized');
