@@ -20,7 +20,7 @@ import {InputComponent} from './components/input/input.component'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthModule} from '@auth0/auth0-angular';
 import {environment} from "../environments/environments";
-import {userReducer} from "../ngRx/user.reducer";
+import {companyReducer, userReducer} from "../ngRx/user.reducer";
 import {CurrentComponent} from "./components/currentComponent";
 import {ToastrModule} from "ngx-toastr";
 import {provideToastr} from 'ngx-toastr';
@@ -29,6 +29,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { UserItemComponent } from './components/user-item/user-item.component';
 import { UserUpdateModalComponent } from './components/user-update-modal/user-update-modal.component';
 import { EditPasswordModalComponent } from './components/edit-password-modal/edit-password-modal.component';
+import { CompanyItemComponent } from './components/company-item/company-item.component';
+import { CreateCompanyModalComponent } from './components/create-company-modal/create-company-modal.component';
+import { CompanyUpdateModalComponent } from './components/company-update-modal/company-update-modal.component';
 
 @NgModule({
   declarations: [
@@ -49,12 +52,15 @@ import { EditPasswordModalComponent } from './components/edit-password-modal/edi
     CurrentComponent,
     UserItemComponent,
     UserUpdateModalComponent,
-    EditPasswordModalComponent
+    EditPasswordModalComponent,
+    CompanyItemComponent,
+    CreateCompanyModalComponent,
+    CompanyUpdateModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({count: counterReducer, user: userReducer}, {}),
+    StoreModule.forRoot({count: counterReducer, user: userReducer, company: companyReducer}, {}),
     FormsModule,
     ReactiveFormsModule,
     AuthModule.forRoot({

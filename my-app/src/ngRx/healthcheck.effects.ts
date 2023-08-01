@@ -1,16 +1,27 @@
 import {
-    checkAuth,
-    deleteUser,
+    checkAuth, createCompany, deleteCompany,
+    deleteUser, getCompanyById,
     getUserById,
     healthCheck,
     logInUser,
-    pagination,
-    SignUp,
+    pagination, paginationForCompanies,
+    SignUp, updateCompany,
     updateUserInfo, updateUserPassword
 } from "src/app/api/api"
 import {Store} from '@ngrx/store';
-import {setPagination, setUser, setUserById, setUserList, User, userToEdit, UserToSignUp} from "./user.actions";
-import {setPagination, setUser, setUserById, setUserList, User, userToEdit, UserToSignUp} from "./user.actions";
+import {
+    CompanyToCreate, setCompany,
+    setCompanyById,
+    setCompanyList,
+    setCompanyPagination,
+    setPagination,
+    setUser,
+    setUserById,
+    setUserList,
+    User,
+    userToEdit,
+    UserToSignUp
+} from "./user.actions"
 
 
 export const healthcheckEffects = () => {
@@ -110,5 +121,57 @@ export const deleteUserEffects = async (id: number) => {
         .catch(function (error) {
             console.log(error)
         })
+}
 
+export const paginationForCompanyList =  async (store: Store, page?: number, size?: number) => {
+    return await paginationForCompanies(page, size)
+        .then(res => {
+            console.log(res)
+            store.dispatch(setCompanyList({companies: res.data.result.companies}));
+            store.dispatch(setCompanyPagination({paginationCompany: res.data.pagination}));
+            return res.data;
+        })
+        .catch(function (error) {
+            console.log(error)
+        });
+}
+
+export const getCompanyByIdEffects = async (id: number, store: Store) => {
+    return await getCompanyById(id)
+        .then(res => {
+            store.dispatch(setCompanyById({companyById: res.data.result}))
+            return res.data
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
+}
+
+export const CreateCompany = async (company: CompanyToCreate, store: Store) => {
+    console.log(company)
+    return await createCompany(company)
+        .then((res) => {
+            return true
+        })
+        .catch(function (error) {
+            console.log(error)
+            return false;
+        });
+}
+
+export const updateCompanyInfoEffects = async (id: number, company: CompanyToCreate, store: Store) => {
+    return await updateCompany(id, company)
+        .then((res) => {
+            store.dispatch(setCompany({company: res.data.result}))
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
+}
+
+export const deleteCompanyEffects = async (id: number) => {
+    return await deleteCompany(id)
+        .catch(function (error) {
+            console.log(error)
+        })
 }
