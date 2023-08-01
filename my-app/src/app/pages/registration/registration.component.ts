@@ -4,7 +4,7 @@ import {delay, map, Observable, of} from "rxjs";
 import {checkAuthEffects, logInUserEffects, SignUpEffects} from "../../../ngRx/healthcheck.effects";
 import {AuthService} from "@auth0/auth0-angular";
 import {Store} from "@ngrx/store";
-import {User, userAuthorized} from "../../../ngRx/user.actions";
+import {User, userAuthorized, UserToSignUp} from "../../../ngRx/user.actions";
 import {UserState} from "../../../ngRx/user.reducer";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
@@ -59,7 +59,8 @@ export class RegistrationPage {
       type: 'text',
     },
   ];
-  private user: {};
+
+  private user: UserToSignUp | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
