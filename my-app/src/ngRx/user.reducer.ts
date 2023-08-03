@@ -3,7 +3,7 @@ import {
     CompanyById,
     CompanyForList, CompanyToCreate,
     PaginationInfoState, setCompany, setCompanyById, setCompanyList, setCompanyPagination,
-    setPagination,
+    setUserPagination,
     setUser,
     setUserById,
     setUserList,
@@ -53,7 +53,7 @@ export const userReducer = createReducer(
     on(setUser, (state, {user}) => ({...state, user})),
     on(setUserList, (state, {users}) => ({...state, users})),
     on(setUserById, (state, {userById}) => ({...state, userById})),
-    on(setPagination, (state, {pagination}) => ({...state, pagination})),
+    on(setUserPagination, (state, {pagination}) => ({...state, pagination})),
 );
 
 export const companyReducer = createReducer(

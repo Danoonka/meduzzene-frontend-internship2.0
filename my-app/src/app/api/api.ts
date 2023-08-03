@@ -40,7 +40,7 @@ export const SignUp = (user: UserToSignUp) => {
     return instance.post('/users/', {...user})
 };
 
-export const pagination = (page?: number, size?: number) => {
+export const paginationForUsers = (page?: number, size?: number) => {
     return instance.get(`/users/`, {
         params: {
             page: page,

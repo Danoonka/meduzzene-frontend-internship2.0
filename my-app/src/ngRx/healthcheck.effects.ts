@@ -4,7 +4,7 @@ import {
     getUserById,
     healthCheck,
     logInUser,
-    pagination, paginationForCompanies,
+    paginationForUsers, paginationForCompanies,
     SignUp, updateCompany,
     updateUserInfo, updateUserPassword
 } from "src/app/api/api"
@@ -14,7 +14,7 @@ import {
     setCompanyById,
     setCompanyList,
     setCompanyPagination,
-    setPagination,
+    setUserPagination,
     setUser,
     setUserById,
     setUserList,
@@ -73,10 +73,10 @@ export const SignUpEffects = async (user: UserToSignUp) => {
 
 
 export const paginationForUserListEffects = async (store: Store, page?: number, size?: number) => {
-    return await pagination(page, size)
+    return await paginationForUsers(page, size)
         .then(res => {
             store.dispatch(setUserList({users: res.data.result.users}));
-            store.dispatch(setPagination({pagination: res.data.pagination}));
+            store.dispatch(setUserPagination({pagination: res.data.pagination}));
             return res.data;
         })
         .catch(function (error) {
