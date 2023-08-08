@@ -1,0 +1,38 @@
+<app-button
+        class="bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+        [text]="'Send Invite'"
+        (btnClick)="showDialog()"
+        [isDisabled]="false"
+></app-button>
+
+<app-modal id="modal_6" class="hhidden overflow-auto">
+    <h2 class="font-bold mb-2 text-center text-lg mt-4 text-[#f039b1]">Send Request</h2>
+    <div class="flex w-[400px] mx-auto my-[50px] gap-[50px] flex-wrap border-[#e305ad] border-[1px] justify-around rounded-md p-[20px]">
+        <ng-container *ngIf="candidates as users">
+            <div *ngFor="let user of users">
+                <app-user-item
+                        [user_id]="user.user_id"
+                        [user_lastname]="user.user_lastname"
+                        [user_firstname]="user.user_firstname"
+                >
+                </app-user-item>
+                <div class="mx-auto my-[20px] w-[150px]">
+                    <app-button
+                            class="bg-transparent hover:bg-[#f039b1] mt-[20px] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                            [text]="'Send Invite'"
+                            (btnClick)="onSendInvite(user.user_id)"
+                            [isDisabled]="false"
+                    ></app-button>
+                </div>
+
+            </div>
+        </ng-container>
+        <app-button
+                class="bg-transparent hover:bg-[#f039b1] mt-[-5px] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                [text]="'Close'"
+                (btnClick)="closeDialog()"
+                [isDisabled]="false"
+        ></app-button>
+    </div>
+
+</app-modal>

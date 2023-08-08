@@ -1,7 +1,7 @@
 <app-button
         class="bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
         [text]="'Create Company'"
-        (btnClick) = "showDialog()"
+        (btnClick)="showDialog()"
         [isDisabled]="false"
 ></app-button>
 
@@ -18,7 +18,10 @@
         <div class="flex justify-around">
             <app-button
                     class="bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
-                    style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);" [isDisabled]="loading" btnClick="onSubmit()" text="Save">
+                    style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"
+                    [isDisabled]="loading"
+                    (btnClick)="onSubmit()"
+                    [text]="'Save'">
             </app-button>
             <app-button
                     class="bg-transparent hover:bg-[#f039b1] mt-[-5px] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"

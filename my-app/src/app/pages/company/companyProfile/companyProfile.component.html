@@ -1,4 +1,23 @@
 <h2 class="font-bold mb-2 text-center text-lg mt-4 text-[#f039b1]">{{title | titlecase }}</h2>
+<ng-container *ngIf="isCurrentUserOwner">
+    <div>
+        <app-button
+                class="bg-transparent hover:bg-[#f039b1] mt-[-5px] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                [text]="'Member'"
+                (btnClick)="goToPage('/company-members')"
+                [isDisabled]="false"></app-button>
+        <app-button
+                class="bg-transparent hover:bg-[#f039b1] mt-[-5px] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                [text]="'Invites'"
+                (btnClick)="goToPage('/company-invites')"
+                [isDisabled]="false"></app-button>
+        <app-button
+                class="bg-transparent hover:bg-[#f039b1] mt-[-5px] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                [text]="'Requests'"
+                (btnClick)="goToPage('/company-requests')"
+                [isDisabled]="false"></app-button>
+    </div>
+</ng-container>
 <div>
     <ng-container *ngIf="company$ | async as company">
         <div class="w-[75%] border-[#e305ad] border-[1px] mx-auto my-[50px] rounded-md ">
@@ -10,6 +29,19 @@
                 <p>description: {{company.company_description}}</p>
             </div>
         </div>
+        <ng-container *ngIf="{ members: members$ | async, user: user$ | async } as data">
+            <ng-container
+                    *ngIf="data.user && data.members && !isUserMember(data.user, data.members) && !isCurrentUserOwner">
+                <div class="flex w-[200px] justify-between mx-auto my-[50px]">
+                    <app-button
+                            class="bg-transparent hover:bg-[#f039b1] mt-[-5px] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                            [text]="'Send Request'"
+                            (btnClick)="onSendRequest()"
+                            [isDisabled]="false"
+                    ></app-button>
+                </div>
+            </ng-container>
+        </ng-container>
         <ng-container *ngIf="isCurrentUserOwner">
             <div class="flex w-[500px] justify-between mx-auto my-[50px]">
                 <app-button
@@ -19,8 +51,8 @@
                         [isDisabled]="false"
                 ></app-button>
                 <app-company-update-modal></app-company-update-modal>
+                <app-send-invite-modal></app-send-invite-modal>
             </div>
         </ng-container>
     </ng-container>
 </div>
-

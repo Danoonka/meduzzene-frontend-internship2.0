@@ -1,16 +1,34 @@
 import {
-    checkAuth, createCompany, deleteCompany,
-    deleteUser, getCompanyById,
+    checkAuth,
+    createCompany,
+    deleteCompany,
+    deleteUser,
+    getCompanyById,
     getUserById,
     healthCheck,
     logInUser,
-    paginationForUsers, paginationForCompanies,
-    SignUp, updateCompany,
-    updateUserInfo, updateUserPassword
+    paginationForUsers,
+    paginationForCompanies,
+    SignUp,
+    updateCompany,
+    updateUserInfo,
+    updateUserPassword,
+    inviteUser,
+    declineAction,
+    acceptInvite,
+    sendRequest,
+    acceptRequest,
+    instance,
+    getInvitesListForUser,
+    getInvitesListForCompany,
+    getRequestListForUser,
+    getRequestListForCompany,
+    getAllUserCompanies, getAllCompanyMembers
 } from "src/app/api/api"
 import {Store} from '@ngrx/store';
 import {
-    CompanyToCreate, setCompany,
+    CompanyToCreate,
+    setCompany,
     setCompanyById,
     setCompanyList,
     setCompanyPagination,
@@ -18,9 +36,13 @@ import {
     setUser,
     setUserById,
     setUserList,
-    User,
     userToEdit,
-    UserToSignUp
+    UserToSignUp,
+    setInvitesListForUser,
+    setInvitesListForCompany,
+    setRequestsListForUser,
+    setRequestsListForCompany,
+    setUsersListForCompany, setCompaniesListForUser
 } from "./user.actions"
 
 
@@ -123,7 +145,7 @@ export const deleteUserEffects = async (id: number) => {
         })
 }
 
-export const paginationForCompanyList =  async (store: Store, page?: number, size?: number) => {
+export const paginationForCompanyList = async (store: Store, page?: number, size?: number) => {
     return await paginationForCompanies(page, size)
         .then(res => {
             console.log(res)
@@ -173,5 +195,88 @@ export const deleteCompanyEffects = async (id: number) => {
     return await deleteCompany(id)
         .catch(function (error) {
             console.log(error)
+        })
+}
+
+export const inviteUserEffects = async (user_id: number, company_id: number) => {
+    return await inviteUser(user_id, company_id)
+        .catch(function (error) {
+            console.log(error)
+        })
+}
+
+export const declineActionEffects = async (action_id: number) => {
+    return await declineAction(action_id)
+        .catch(function (error) {
+            console.log(error)
+        })
+}
+
+export const acceptInviteEffects = async (action_id: number) => {
+    return await acceptInvite(action_id)
+        .catch(function (error) {
+            console.log(error)
+        })
+}
+
+export const sendRequestEffects = async (user_id: number, company_id: number) => {
+    return await sendRequest(user_id, company_id)
+        .catch(function (error) {
+            console.log(error)
+        })
+}
+
+export const acceptRequestEffects = async (action_id: number) => {
+    return await acceptRequest(action_id)
+        .catch(function (error) {
+            console.log(error)
+        })
+}
+
+export const getInvitesListForUserEffects = async (user_id: number, store: Store) => {
+    return await getInvitesListForUser(user_id)
+        .then(res => {
+            store.dispatch(setInvitesListForUser({invitesForUser: res.data.result}))
+            return res.data
+        })
+}
+
+export const getInvitesListForCompanyEffects = async (company_id: number, store: Store) => {
+    return await getInvitesListForCompany(company_id)
+        .then(res => {
+            store.dispatch(setInvitesListForCompany({invitesForCompany: res.data.result}))
+            return res.data
+        })
+}
+
+export const getRequestListForUserEffects = async (user_id: number, store: Store) => {
+    return await getRequestListForUser(user_id)
+        .then(res => {
+            store.dispatch(setRequestsListForUser({requestsForUser: res.data.result}))
+            return res.data
+        })
+}
+
+export const getRequestListForCompanyEffects = async (company_id: number, store: Store) => {
+    return await getRequestListForCompany(company_id)
+        .then(res => {
+            store.dispatch(setRequestsListForCompany({requestsForCompany: res.data.result}))
+            return res.data
+        })
+}
+
+export const getCompaniesListForUserEffects = async (user_id: number, store: Store) => {
+    return await getAllUserCompanies(user_id)
+        .then(res => {
+            store.dispatch(setCompaniesListForUser({companiesForUser: res.data.result}))
+            return res.data
+        })
+}
+
+export const getUsersListForCompanyEffects = async (company_id: number, store: Store) => {
+    return await getAllCompanyMembers(company_id)
+        .then(res => {
+            store.dispatch(setUsersListForCompany({usersForCompany: res.data.result}))
+            return res.data
         })
 }

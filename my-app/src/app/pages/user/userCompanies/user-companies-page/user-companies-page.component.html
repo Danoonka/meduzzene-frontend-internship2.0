@@ -1,0 +1,27 @@
+<h2 class="font-bold mb-2 text-center text-lg mt-4 text-[#f039b1]">{{title | titlecase }}</h2>
+<div
+        class="flex w-[90%] mx-auto my-[50px] gap-[50px] flex-wrap border-[#e305ad] border-[1px] justify-around rounded-md p-[20px]">
+    <ng-container *ngIf="companies$ | async as companies">
+        <div *ngFor="let company of companies">
+            <app-company-item
+                    [company_id]="company.company_id"
+                    [company_name]="company.company_name"
+            >
+            </app-company-item>
+            <ng-container *ngIf="(user$ | async) as user">
+                <ng-container *ngIf="!(user.user_id === company.owner_id)">
+                    <div
+                            class="mx-[auto] my-[20px] w-[300px]">
+                        <app-button
+                                class="bg-transparent hover:bg-[#f039b1] mx-[75px] mt-[-5px] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                                [text]="'Leave company'"
+                                (btnClick)="onLeave(company.action_id)"
+                                [isDisabled]="false"
+                        ></app-button>
+                    </div>
+
+                </ng-container>
+            </ng-container>
+        </div>
+    </ng-container>
+</div>
