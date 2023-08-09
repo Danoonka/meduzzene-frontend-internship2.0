@@ -1,0 +1,19 @@
+<h2 class="font-bold mb-2 text-center text-lg mt-4 text-[#f039b1]">{{title | titlecase }}</h2>
+<div class="flex w-[90%] mx-auto my-[50px] gap-[50px] flex-wrap border-[#e305ad] border-[1px] justify-around rounded-md p-[20px]">
+    <ng-container *ngIf="admins$ | async as admins">
+        <div *ngFor="let admin of admins">
+            <app-user-item
+                    [user_id]="admin.user_id"
+                    [user_lastname]="admin.user_lastname"
+                    [user_firstname]="admin.user_firstname"
+            >
+            </app-user-item>
+            <app-button
+                    class="bg-transparent my-[20px] mx-[75px] hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                    [text]="'Delete admin'"
+                    (btnClick)="onDeleteAdmin(admin.action_id)"
+                    [isDisabled]="false"
+            ></app-button>
+        </div>
+    </ng-container>
+</div>

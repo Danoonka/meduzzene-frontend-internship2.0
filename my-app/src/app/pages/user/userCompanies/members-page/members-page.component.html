@@ -9,16 +9,26 @@
             >
             </app-user-item>
             <ng-container *ngIf="(company$ | async) as company">
-                <ng-container *ngIf="!(member.user_id === company.owner_id)">
-                    <div class="mx-[auto] my-[20px] w-[300px]">
-                        <app-button
-                                class="bg-transparent hover:bg-[#f039b1] mx-[75px] mt-[-5px] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
-                                [text]="'Leave company'"
-                                (btnClick)="onFire(member.action_id)"
-                                [isDisabled]="false"
-                        ></app-button>
-                    </div>
+                <ng-container *ngIf="(admins$ | async) as admins">
+                    <ng-container
+                            *ngIf="!(member.user_id === company.owner_id) && !isUserAdmin(member.user_id, admins)">
+                        <div class="flex gap-[10px]">
+                            <app-button
+                                    class="bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                                    [text]="'Delete member'"
+                                    (btnClick)="onFire(member.action_id)"
+                                    [isDisabled]="false"
+                            ></app-button>
+                            <app-button
+                                    class="bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                                    [text]="'Make Admin'"
+                                    (btnClick)="onMakeAdmin(member.action_id)"
+                                    [isDisabled]="false"
+                            ></app-button>
+                        </div>
+                    </ng-container >
                 </ng-container>
+
             </ng-container>
         </div>
     </ng-container>

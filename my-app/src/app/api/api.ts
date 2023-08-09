@@ -137,4 +137,16 @@ export const getAllCompanyMembers = (company_id: number) => {
     return instance.get(`/actions/company-users-list/${company_id}`)
 }
 
+export const createAdmin = (action_id: number) => {
+    return instance.post(`/actions/add-admin-role/${action_id}`)
+}
+
+export const deleteAdmin = (action_id: number)=>{
+    return instance.put(`/actions/delete_admin/${action_id}`)
+}
+
+export const getAllAdmins = (company_id: number) => {
+    return instance.get(`/actions/get-all-admins/company/${company_id}`)
+}
+
 

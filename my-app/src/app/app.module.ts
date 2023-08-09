@@ -39,6 +39,7 @@ import { MembersPageComponent } from './pages/user/userCompanies/members-page/me
 import { CompanyInvitesPageComponent } from './pages/user/userCompanies/company-invites-page/company-invites-page.component';
 import { CompanyRequestsPageComponent } from './pages/user/userCompanies/company-requests-page/company-requests-page.component';
 import { SendInviteModalComponent } from './components/send-invite-modal/send-invite-modal.component';
+import { CompanyAdminsPageComponent } from './pages/user/userCompanies/company-admins-page/company-admins-page.component';
 
 @NgModule({
     declarations: [
@@ -69,7 +70,8 @@ import { SendInviteModalComponent } from './components/send-invite-modal/send-in
         MembersPageComponent,
         CompanyInvitesPageComponent,
         CompanyRequestsPageComponent,
-        SendInviteModalComponent
+        SendInviteModalComponent,
+        CompanyAdminsPageComponent
     ],
     imports: [
         BrowserModule,
