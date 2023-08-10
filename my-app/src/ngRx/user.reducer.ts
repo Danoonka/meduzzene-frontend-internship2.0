@@ -1,8 +1,13 @@
 import {createReducer, on} from '@ngrx/store';
 import {
     CompanyById,
-    CompanyForList, CompanyToCreate,
-    PaginationInfoState, setCompany, setCompanyById, setCompanyList, setCompanyPagination,
+    CompanyForList,
+    CompanyToCreate,
+    PaginationInfoState,
+    setCompany,
+    setCompanyById,
+    setCompanyList,
+    setCompanyPagination,
     setUserPagination,
     setUser,
     setUserById,
@@ -10,7 +15,12 @@ import {
     User,
     userAuthorized,
     UserForList,
-    userUnAuthorized
+    userUnAuthorized,
+    setInvitesListForUser,
+    setInvitesListForCompany,
+    setRequestsListForUser,
+    setRequestsListForCompany,
+    setUsersListForCompany, setCompaniesListForUser
 } from './user.actions';
 
 export interface UserState {
@@ -29,6 +39,15 @@ export interface CompanyState {
     company: CompanyToCreate | null
 }
 
+export interface ActionState {
+    invitesForUser: CompanyForList[] | [],
+    invitesForCompany: UserForList[] | [],
+    requestsForUser: CompanyForList[] | [],
+    requestsForCompany: UserForList[] | [],
+    companiesForUser: CompanyForList[] | [],
+    usersForCompany: UserForList[] | []
+}
+
 
 export const initialState: UserState = {
     isAuthorized: false,
@@ -43,6 +62,15 @@ export const initialCompanyState: CompanyState = {
     companies: [],
     companyById: null,
     company: null
+}
+
+export const initialActionState: ActionState = {
+    invitesForUser: [],
+    invitesForCompany: [],
+    requestsForUser: [],
+    requestsForCompany: [],
+    companiesForUser: [],
+    usersForCompany: []
 }
 
 
@@ -62,4 +90,15 @@ export const companyReducer = createReducer(
     on(setCompanyList, (state, {companies}) => ({...state, companies})),
     on(setCompanyById, (state, {companyById}) => ({...state, companyById})),
     on(setCompany, (state, {company}) => ({...state, company}))
+)
+
+
+export const actionReducer = createReducer(
+    initialActionState,
+    on(setInvitesListForUser, (state, {invitesForUser}) => ({...state, invitesForUser})),
+    on(setInvitesListForCompany, (state, {invitesForCompany}) => ({...state, invitesForCompany})),
+    on(setRequestsListForUser, (state, {requestsForUser}) => ({...state, requestsForUser})),
+    on(setRequestsListForCompany, (state, {requestsForCompany}) => ({...state, requestsForCompany})),
+    on(setCompaniesListForUser, (state, {companiesForUser}) => ({...state, companiesForUser})),
+    on(setUsersListForCompany, (state, {usersForCompany}) => ({...state, usersForCompany}))
 )

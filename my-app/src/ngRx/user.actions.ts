@@ -17,6 +17,7 @@ export interface UserForList {
     user_avatar: string;
     user_firstname: string;
     user_lastname: string;
+    action_id: number
 }
 
 export const initialCurrentUserState: User = {
@@ -59,7 +60,9 @@ export interface UserToSignUp {
 export interface CompanyForList {
     company_id: number,
     company_name: string,
-    company_avatar: string
+    company_avatar: string,
+    action_id: number,
+    owner_id: number
 }
 
 export interface CompanyById {
@@ -82,10 +85,18 @@ export const setUser = createAction('[User] Set User', props<{ user: User | null
 export const setUserList = createAction('[Users] Set Users List', props<{ users: UserForList[] }>())
 export const setUserById = createAction('[User] Set User By Id', props<{ userById: User }>())
 export const setUserPagination = createAction('pagination', props<{ pagination: PaginationInfoState }>())
+
 export const setCompanyPagination = createAction('paginationForUsers for company', props<{ paginationCompany: PaginationInfoState }>())
 export const setCompanyList = createAction('[Companies] Set Companies List', props<{ companies: CompanyForList[] }>())
 export const setCompanyById = createAction('[Company] Set Company By Id', props<{ companyById: CompanyById }>())
 export const setCompany = createAction('[Company] Set Company', props<{ company: CompanyToCreate | null }>());
+
+export const setInvitesListForUser = createAction('[Actions] set invites for user', props<{ invitesForUser: CompanyForList[] }>())
+export const setInvitesListForCompany = createAction('[Actions] set invites for company', props<{ invitesForCompany: UserForList[] }>())
+export const setRequestsListForUser = createAction('[Actions] set requests for user', props<{ requestsForUser: CompanyForList[] }>())
+export const setRequestsListForCompany = createAction('[Actions] set requests for company', props<{ requestsForCompany: UserForList[] }>())
+export const setCompaniesListForUser = createAction('[Actions] set companies for user', props<{ companiesForUser: CompanyForList[] }>())
+export const setUsersListForCompany = createAction('[Actions] set users for company', props<{ usersForCompany: UserForList[] }>())
 
 
 

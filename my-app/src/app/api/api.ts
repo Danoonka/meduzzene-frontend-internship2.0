@@ -1,6 +1,6 @@
 import axios, {AxiosInstance, AxiosRequestConfig} from "axios";
 import {environment} from "src/environments/environments";
-import {CompanyToCreate, User, userToEdit, UserToSignUp} from "../../ngRx/user.actions";
+import {CompanyToCreate, userToEdit, UserToSignUp} from "../../ngRx/user.actions";
 
 
 export const instance: AxiosInstance = axios.create({
@@ -19,7 +19,6 @@ instance.interceptors.request.use(
     error => Promise.reject(error)
 );
 
-
 export const healthCheck = () => {
     return instance.get('/')
 }
@@ -34,7 +33,6 @@ export const logInUser = (email: string, password: string) => {
 export const checkAuth = () => {
     return instance.get('/auth/me/');
 };
-
 
 export const SignUp = (user: UserToSignUp) => {
     return instance.post('/users/', {...user})
@@ -66,7 +64,6 @@ export const updateUserPassword = (id: number, password: string, new_password: s
     });
 };
 
-
 export const deleteUser = (id: number) => {
     return instance.delete(`/users/${id}/`);
 };
@@ -96,6 +93,48 @@ export const deleteCompany = (id: number) => {
     return instance.delete(`/company/${id}/`);
 }
 
+export const inviteUser = (user_id: number, company_id: number) => {
+    return instance.post(`/actions/invite-user/${company_id}/user/${user_id}/`)
+}
 
+export const declineAction = (action_id: number) => {
+    return instance.delete(`/actions/decline-action/${action_id}/`)
+}
+
+export const acceptInvite = (action_id: number) => {
+    return instance.put(`/actions/accept-invite/${action_id}/`)
+}
+
+export const sendRequest = (user_id: number, company_id: number) => {
+    return instance.post(`/actions/request-company/${company_id}/user/${user_id}/`)
+}
+
+export const acceptRequest = (action_id: number) => {
+    return instance.put(`/actions/accept-request/${action_id}/`)
+}
+
+export const getInvitesListForUser = (user_id: number) => {
+    return instance.get(`/actions/user-invites-list/${user_id}`)
+}
+
+export const getInvitesListForCompany = (company_id: number) => {
+    return instance.get(`/actions/company-invites-list/${company_id}/`)
+}
+
+export const getRequestListForUser = (user_id: number) => {
+    return instance.get(`/actions/user-request-list/${user_id}`)
+}
+
+export const getRequestListForCompany = (company_id: number) => {
+    return instance.get(`/actions/company-request-list/${company_id}`)
+}
+
+export const getAllUserCompanies = (user_id: number) => {
+    return instance.get(`/actions/user-companies-list/${user_id}`)
+}
+
+export const getAllCompanyMembers = (company_id: number) => {
+    return instance.get(`/actions/company-users-list/${company_id}`)
+}
 
 

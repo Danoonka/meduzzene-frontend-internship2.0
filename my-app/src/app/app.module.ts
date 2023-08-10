@@ -20,64 +20,83 @@ import {InputComponent} from './components/input/input.component'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthModule} from '@auth0/auth0-angular';
 import {environment} from "../environments/environments";
-import {companyReducer, userReducer} from "../ngRx/user.reducer";
+import {actionReducer, companyReducer, userReducer} from "../ngRx/user.reducer";
 import {CurrentComponent} from "./components/currentComponent";
 import {ToastrModule} from "ngx-toastr";
 import {provideToastr} from 'ngx-toastr';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { UserItemComponent } from './components/user-item/user-item.component';
-import { UserUpdateModalComponent } from './components/user-update-modal/user-update-modal.component';
-import { EditPasswordModalComponent } from './components/edit-password-modal/edit-password-modal.component';
-import { CompanyItemComponent } from './components/company-item/company-item.component';
-import { CreateCompanyModalComponent } from './components/create-company-modal/create-company-modal.component';
-import { CompanyUpdateModalComponent } from './components/company-update-modal/company-update-modal.component';
+import {UserItemComponent} from './components/user-item/user-item.component';
+import {UserUpdateModalComponent} from './components/user-update-modal/user-update-modal.component';
+import {EditPasswordModalComponent} from './components/edit-password-modal/edit-password-modal.component';
+import {CompanyItemComponent} from './components/company-item/company-item.component';
+import {CreateCompanyModalComponent} from './components/create-company-modal/create-company-modal.component';
+import {CompanyUpdateModalComponent} from './components/company-update-modal/company-update-modal.component';
+import { UserCompaniesPageComponent } from './pages/user/userCompanies/user-companies-page/user-companies-page.component';
+import { UserInvitesPageComponent } from './pages/user/userCompanies/user-invites-page/user-invites-page.component';
+import { UserRequestsPageComponent } from './pages/user/userCompanies/user-rrquests-page/user-requests-page.component';
+import { MembersPageComponent } from './pages/user/userCompanies/members-page/members-page.component';
+import { CompanyInvitesPageComponent } from './pages/user/userCompanies/company-invites-page/company-invites-page.component';
+import { CompanyRequestsPageComponent } from './pages/user/userCompanies/company-requests-page/company-requests-page.component';
+import { SendInviteModalComponent } from './components/send-invite-modal/send-invite-modal.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AboutPage,
-    AuthorisationPage,
-    CompanyListPage,
-    CompanyProfilePage,
-    MainPage,
-    RegistrationPage,
-    UserListPage,
-    UserProfilePage,
-    ModalComponent,
-    NavigationComponent,
-    MyCounterComponent,
-    ButtonComponent,
-    InputComponent,
-    CurrentComponent,
-    UserItemComponent,
-    UserUpdateModalComponent,
-    EditPasswordModalComponent,
-    CompanyItemComponent,
-    CreateCompanyModalComponent,
-    CompanyUpdateModalComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    StoreModule.forRoot({count: counterReducer, user: userReducer, company: companyReducer}, {}),
-    FormsModule,
-    ReactiveFormsModule,
-    AuthModule.forRoot({
-      domain: environment.domain,
-      clientId: environment.clientId,
-      authorizationParams: {
-        audience: environment.audience,
-        redirect_uri: window.location.origin
-      }
-    }),
-    ToastrModule.forRoot(),
-    BrowserAnimationsModule,
-  ],
-  providers: [
-    provideAnimations(),
-    provideToastr(),],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        AboutPage,
+        AuthorisationPage,
+        CompanyListPage,
+        CompanyProfilePage,
+        MainPage,
+        RegistrationPage,
+        UserListPage,
+        UserProfilePage,
+        ModalComponent,
+        NavigationComponent,
+        MyCounterComponent,
+        ButtonComponent,
+        InputComponent,
+        CurrentComponent,
+        UserItemComponent,
+        UserUpdateModalComponent,
+        EditPasswordModalComponent,
+        CompanyItemComponent,
+        CreateCompanyModalComponent,
+        CompanyUpdateModalComponent,
+        UserCompaniesPageComponent,
+        UserInvitesPageComponent,
+        UserRequestsPageComponent,
+        MembersPageComponent,
+        CompanyInvitesPageComponent,
+        CompanyRequestsPageComponent,
+        SendInviteModalComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        StoreModule.forRoot({
+            count: counterReducer,
+            user: userReducer,
+            company: companyReducer,
+            action: actionReducer
+        }, {}),
+        FormsModule,
+        ReactiveFormsModule,
+        AuthModule.forRoot({
+            domain: environment.domain,
+            clientId: environment.clientId,
+            authorizationParams: {
+                audience: environment.audience,
+                redirect_uri: window.location.origin
+            }
+        }),
+        ToastrModule.forRoot(),
+        BrowserAnimationsModule,
+    ],
+    providers: [
+        provideAnimations(),
+        provideToastr(),],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
