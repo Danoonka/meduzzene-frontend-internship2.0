@@ -63,14 +63,14 @@ export class MembersPageComponent {
 
     onMakeAdmin(action_id: number) {
         this.companySubscription = this.company$.subscribe((company) => {
-            this.adminsSubscription = this.admins$.subscribe((admins) => {
+            this.adminsSubscription = this.members$.subscribe(() => {
                 if (company) {
-                    getUsersListForCompanyEffects(company.company_id, this.store).then(() => {
-                        createAdminEffects(action_id)
-                        getAllAdminsEffects(company.company_id, this.store)
-                    })
+                    createAdminEffects(action_id)
+                    getAllAdminsEffects(company.company_id, this.store)
+                    getUsersListForCompanyEffects(company.company_id, this.store)
                 }
             })
+
         });
     }
 
