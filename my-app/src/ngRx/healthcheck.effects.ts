@@ -23,7 +23,7 @@ import {
     getInvitesListForCompany,
     getRequestListForUser,
     getRequestListForCompany,
-    getAllUserCompanies, getAllCompanyMembers
+    getAllUserCompanies, getAllCompanyMembers, createAdmin, deleteAdmin, getAllAdmins
 } from "src/app/api/api"
 import {Store} from '@ngrx/store';
 import {
@@ -42,7 +42,7 @@ import {
     setInvitesListForCompany,
     setRequestsListForUser,
     setRequestsListForCompany,
-    setUsersListForCompany, setCompaniesListForUser
+    setUsersListForCompany, setCompaniesListForUser, setAdminsListForCompany
 } from "./user.actions"
 
 
@@ -277,6 +277,28 @@ export const getUsersListForCompanyEffects = async (company_id: number, store: S
     return await getAllCompanyMembers(company_id)
         .then(res => {
             store.dispatch(setUsersListForCompany({usersForCompany: res.data.result}))
+            return res.data
+        })
+}
+
+export const createAdminEffects = async (action_id: number) => {
+    return await createAdmin(action_id)
+        .catch(function (error) {
+            console.log(error)
+        })
+}
+
+export const deleteAdminEffects = async (action_id: number) => {
+    return await deleteAdmin(action_id)
+        .catch(function (error) {
+            console.log(error)
+        })
+}
+
+export const getAllAdminsEffects = async (company_id: number, store: Store) =>{
+    return await getAllAdmins(company_id)
+        .then(res => {
+            store.dispatch(setAdminsListForCompany({adminsForCompany: res.data.result}))
             return res.data
         })
 }

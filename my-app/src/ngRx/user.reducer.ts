@@ -20,7 +20,7 @@ import {
     setInvitesListForCompany,
     setRequestsListForUser,
     setRequestsListForCompany,
-    setUsersListForCompany, setCompaniesListForUser
+    setUsersListForCompany, setCompaniesListForUser, setAdminsListForCompany
 } from './user.actions';
 
 export interface UserState {
@@ -46,6 +46,7 @@ export interface ActionState {
     requestsForCompany: UserForList[] | [],
     companiesForUser: CompanyForList[] | [],
     usersForCompany: UserForList[] | []
+    adminsForCompany: UserForList[] | []
 }
 
 
@@ -70,7 +71,8 @@ export const initialActionState: ActionState = {
     requestsForUser: [],
     requestsForCompany: [],
     companiesForUser: [],
-    usersForCompany: []
+    usersForCompany: [],
+    adminsForCompany: []
 }
 
 
@@ -100,5 +102,6 @@ export const actionReducer = createReducer(
     on(setRequestsListForUser, (state, {requestsForUser}) => ({...state, requestsForUser})),
     on(setRequestsListForCompany, (state, {requestsForCompany}) => ({...state, requestsForCompany})),
     on(setCompaniesListForUser, (state, {companiesForUser}) => ({...state, companiesForUser})),
-    on(setUsersListForCompany, (state, {usersForCompany}) => ({...state, usersForCompany}))
+    on(setUsersListForCompany, (state, {usersForCompany}) => ({...state, usersForCompany})),
+    on(setAdminsListForCompany, (state, {adminsForCompany}) => ({...state, adminsForCompany}))
 )

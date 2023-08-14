@@ -97,6 +97,7 @@ export const setRequestsListForUser = createAction('[Actions] set requests for u
 export const setRequestsListForCompany = createAction('[Actions] set requests for company', props<{ requestsForCompany: UserForList[] }>())
 export const setCompaniesListForUser = createAction('[Actions] set companies for user', props<{ companiesForUser: CompanyForList[] }>())
 export const setUsersListForCompany = createAction('[Actions] set users for company', props<{ usersForCompany: UserForList[] }>())
+export const setAdminsListForCompany = createAction('[Actions] set admins for company', props<{ adminsForCompany: UserForList[] }>())
 
 
 

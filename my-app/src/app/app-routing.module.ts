@@ -15,6 +15,7 @@ import {UserRequestsPageComponent} from "./pages/user/userCompanies/user-rrquest
 import {MembersPageComponent} from "./pages/user/userCompanies/members-page/members-page.component";
 import {CompanyInvitesPageComponent} from "./pages/user/userCompanies/company-invites-page/company-invites-page.component";
 import {CompanyRequestsPageComponent} from "./pages/user/userCompanies/company-requests-page/company-requests-page.component";
+import {CompanyAdminsPageComponent} from "./pages/user/userCompanies/company-admins-page/company-admins-page.component";
 
 const routes: Routes = [
     {path: '', component: MainPage},
@@ -31,6 +32,7 @@ const routes: Routes = [
     {path: 'company-members', component: MembersPageComponent, canActivate: [AuthGuard]},
     {path: 'company-invites', component: CompanyInvitesPageComponent, canActivate: [AuthGuard]},
     {path: 'company-requests', component: CompanyRequestsPageComponent, canActivate: [AuthGuard]},
+    {path: 'company-admins', component: CompanyAdminsPageComponent, canActivate: [AuthGuard]},
     // {path: '**', component: MainPage},
 
 ];
