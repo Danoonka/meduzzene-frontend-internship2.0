@@ -1,0 +1,58 @@
+<app-button
+        class="bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+        [text]="'Create Quiz'"
+        (btnClick)="showDialog()"
+        [isDisabled]="false"
+></app-button>
+<app-modal
+        id="modal_7" class="hhidden">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <app-input
+                [label]="'Quiz name'"
+                name="'quizName"
+                [control] ="form.get('quizName')"
+                [type]=type>
+        </app-input>
+        <app-input
+                [label]="'Frequency'"
+                name="'Frequency"
+                [control] ="form.get('Frequency')"
+                [type]=typeNumber
+                [min]="1"
+        >
+        </app-input>
+        <div>
+            <div *ngFor="let question of questions; let i = index" class="question-input">
+                <app-question-field
+                        [questionIndex]="i"
+                        [answers]="question.answers"
+                        [questionText]="question.text"
+                        (answerOptionsChange)="updateAnswerOptions(i, $event)"
+                        (questionOptionsChange)="updateQuestionOptions(i, $event)"
+                ></app-question-field>
+            </div>
+            <app-button
+                    class="bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                    style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"
+                    [isDisabled]="false"
+                    (btnClick)="addQuestion()"
+                    [text]="'Add Question'">
+            </app-button>
+        </div>
+        <div class="flex m-[20px] justify-around">
+            <app-button
+                    class="bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                    style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"
+                    [isDisabled]="loading"
+                    (btnClick)="onSubmit()"
+                    [text]="'Save'">
+            </app-button>
+            <app-button
+                    class="bg-transparent hover:bg-[#f039b1] mt-[-5px] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                    [text]="'Close'"
+                    (btnClick)="closeDialog()"
+                    [isDisabled]="false"
+            ></app-button>
+        </div>
+    </form>
+</app-modal>

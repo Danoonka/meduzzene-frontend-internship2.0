@@ -1,0 +1,48 @@
+<app-button
+        class="block h-[40px] bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-[50%] hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+        [text]="'Edit'"
+        (btnClick)="showDialog()"
+        [isDisabled]="false"
+></app-button>
+
+<app-modal id="modal_9" class="hhidden">
+    <h2 class="font-bold mb-2 text-center text-lg mt-4 text-[#f039b1]">Update Question</h2>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div>
+            <app-input
+                    [label]="'Question Text'"
+                    name="'question_text'"
+                    [control]="form.get('question_text')"
+                    [type]="'text'"
+            ></app-input>
+            <div *ngFor="let answerControl of questionAnswers.controls; let i = index">
+                <app-input
+                        [label]="'Answer ' + (i + 1)"
+                        [control]="answerControl"
+                        [type]="'text'"
+                ></app-input>
+            </div>
+            <app-input
+                    [label]="'Question Correct Answer'"
+                    name="'question_correct_answer'"
+                    [control]="form.get('question_correct_answer')"
+                    [type]="'number'"
+                    [min]=0
+                    [max]="questionAnswers.length-1"
+            ></app-input>
+        </div>
+        <app-button
+                class="bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"
+                [isDisabled]="loading"
+                (btnClick)="onSubmit()"
+                [text]="'Save'"
+        ></app-button>
+        <app-button
+                class="bg-transparent hover:bg-[#f039b1] mt-[-5px] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                [text]="'Close'"
+                (btnClick)="closeDialog()"
+                [isDisabled]="false"
+        ></app-button>
+    </form>
+</app-modal>

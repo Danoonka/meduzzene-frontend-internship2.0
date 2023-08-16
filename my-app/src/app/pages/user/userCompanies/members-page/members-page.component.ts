@@ -8,8 +8,8 @@ import {
     createAdminEffects,
     declineActionEffects,
 } from '../../../../../ngRx/healthcheck.effects';
-import { UserForList, CompanyById } from '../../../../../ngRx/user.actions';
 import { ActionState, CompanyState } from '../../../../../ngRx/user.reducer';
+import {CompanyById, UserForList} from "../../../../types/types";
 
 @Component({
     selector: 'app-members-page',
@@ -48,7 +48,6 @@ export class MembersPageComponent implements OnInit, OnDestroy {
                 take(1) // Ensure the observable completes after emitting once
             )
             .subscribe((members) => {
-                // You can use members here
             });
     }
 
@@ -79,7 +78,6 @@ export class MembersPageComponent implements OnInit, OnDestroy {
                 take(1)
             )
             .subscribe((members) => {
-                // You can use members here
             });
     }
 
@@ -105,7 +103,6 @@ export class MembersPageComponent implements OnInit, OnDestroy {
                 take(1)
             )
             .subscribe((members) => {
-                // You can use members here
             });
     }
 }

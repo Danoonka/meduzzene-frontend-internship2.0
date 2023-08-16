@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
 import {Observable, Subscription} from "rxjs";
-import {CompanyById, UserForList} from "../../../../../ngRx/user.actions";
 import {Store} from "@ngrx/store";
 import {ActionState, CompanyState} from "../../../../../ngRx/user.reducer";
 import {
     acceptRequestEffects, declineActionEffects,
     getRequestListForCompanyEffects
 } from "../../../../../ngRx/healthcheck.effects";
+import {CompanyById, UserForList} from "../../../../types/types";
 
 @Component({
     selector: 'app-company-requests-page',

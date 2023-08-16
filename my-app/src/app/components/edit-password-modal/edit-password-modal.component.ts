@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 import {Observable} from "rxjs";
-import {User} from "../../../ngRx/user.actions";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {UserState} from "../../../ngRx/user.reducer";
 import {updateUserPasswordEffects} from "../../../ngRx/healthcheck.effects";
+import {User} from "../../types/types";
 
 
 @Component({

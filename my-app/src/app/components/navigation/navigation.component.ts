@@ -3,8 +3,9 @@ import {Router} from "@angular/router";
 import {AuthService} from "@auth0/auth0-angular";
 import {Store} from "@ngrx/store";
 import {Observable, Subscription} from "rxjs";
-import {User, userUnAuthorized} from "../../../ngRx/user.actions";
+import {userUnAuthorized} from "../../../ngRx/user.actions";
 import {UserState} from "../../../ngRx/user.reducer";
+import {User} from "../../types/types";
 
 @Component({
   selector: 'app-navigation',

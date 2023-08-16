@@ -23,11 +23,17 @@ import {
     getInvitesListForCompany,
     getRequestListForUser,
     getRequestListForCompany,
-    getAllUserCompanies, getAllCompanyMembers, createAdmin, deleteAdmin, getAllAdmins
+    getAllUserCompanies,
+    getAllCompanyMembers,
+    createAdmin,
+    deleteAdmin,
+    getAllAdmins,
+    createQuiz,
+    updateQuiz,
+    deleteQuiz, getAllCompanyQuiz, addQuestion, updateQuestion, deleteQuestion, getQuizById, getQuestionByID
 } from "src/app/api/api"
 import {Store} from '@ngrx/store';
 import {
-    CompanyToCreate,
     setCompany,
     setCompanyById,
     setCompanyList,
@@ -36,14 +42,13 @@ import {
     setUser,
     setUserById,
     setUserList,
-    userToEdit,
-    UserToSignUp,
     setInvitesListForUser,
     setInvitesListForCompany,
     setRequestsListForUser,
     setRequestsListForCompany,
     setUsersListForCompany, setCompaniesListForUser, setAdminsListForCompany
 } from "./user.actions"
+import {CompanyToCreate, Question, Quiz, QuizInfo, userToEdit, UserToSignUp} from "../app/types/types";
 
 
 export const healthcheckEffects = () => {
@@ -295,10 +300,79 @@ export const deleteAdminEffects = async (action_id: number) => {
         })
 }
 
-export const getAllAdminsEffects = async (company_id: number, store: Store) =>{
+export const getAllAdminsEffects = async (company_id: number, store: Store) => {
     return await getAllAdmins(company_id)
         .then(res => {
             store.dispatch(setAdminsListForCompany({adminsForCompany: res.data.result}))
             return res.data
+        })
+}
+
+export const createQuizEffects = async (company_id: number, quiz: Quiz) => {
+    return await createQuiz(company_id, quiz)
+        .catch(function (error) {
+            console.log(error)
+        })
+}
+
+export const updateQuizEffects = async (quiz_id: number, quiz: QuizInfo) => {
+    return await updateQuiz(quiz_id, quiz)
+        .catch(function (error) {
+            console.log(error)
+        })
+}
+
+export const deleteQuizEffects = async (quiz_id: number) => {
+    return await deleteQuiz(quiz_id)
+        .catch(function (error) {
+            console.log(error)
+        })
+}
+
+export const getQuizByIdEffects = async (quiz_id: number) => {
+    return await getQuizById(quiz_id)
+        .then(res => {
+            return res.data
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
+}
+
+export const getAllCompanyQuizEffects = async (company_id: number) => {
+    return await getAllCompanyQuiz(company_id)
+        .catch(function (error) {
+            console.log(error)
+        })
+}
+
+export const addQuestionEffects = async (quiz_id: number, question: Question) => {
+    return await addQuestion(quiz_id, question)
+        .catch(function (error) {
+            console.log(error)
+        })
+}
+
+export const updateQuestionEffects = async (quiz_id: number, question_id: number, question: Question) => {
+    return await updateQuestion(quiz_id, question_id, question)
+        .catch(function (error) {
+            console.log(error)
+        })
+}
+
+export const deleteQuestionEffects = async (quiz_id: number, question_id: number) => {
+    return await deleteQuestion(quiz_id, question_id)
+        .catch(function (error) {
+            console.log(error)
+        })
+}
+
+export const getQuestionByIdEffects = async (question_id: number) => {
+    return await getQuestionByID(question_id)
+        .then(res=>{
+            return res.data
+        })
+        .catch(function (error) {
+            console.log(error)
         })
 }

@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {Observable, Subscription} from "rxjs";
-import {CompanyById, UserForList} from "../../../ngRx/user.actions";
 import {ActionState, CompanyState, UserState} from "../../../ngRx/user.reducer";
 import {Store} from "@ngrx/store";
 import {
@@ -9,6 +8,7 @@ import {
     inviteUserEffects,
     paginationForUserListEffects,
 } from "../../../ngRx/healthcheck.effects";
+import {CompanyById, UserForList} from "../../types/types";
 
 @Component({
     selector: 'app-send-invite-modal',

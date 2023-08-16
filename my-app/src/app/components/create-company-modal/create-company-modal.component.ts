@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import {Observable} from "rxjs";
-import {CompanyForList, CompanyToCreate} from "../../../ngRx/user.actions";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {CompanyState} from "../../../ngRx/user.reducer";
 import {CreateCompany} from "../../../ngRx/healthcheck.effects";
+import {CompanyToCreate} from "../../types/types";
 
 @Component({
   selector: 'app-create-company-modal',

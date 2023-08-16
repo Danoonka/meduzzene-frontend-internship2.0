@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from "rxjs";
-import {CompanyForList, User} from "../../../../../ngRx/user.actions";
 import {Store} from "@ngrx/store";
 import {ActionState, UserState} from "../../../../../ngRx/user.reducer";
 import {declineActionEffects, getCompaniesListForUserEffects} from "../../../../../ngRx/healthcheck.effects";
+import {CompanyForList, User} from "../../../../types/types";
 
 @Component({
     selector: 'app-user-companies-page',

@@ -16,6 +16,7 @@ import {MembersPageComponent} from "./pages/user/userCompanies/members-page/memb
 import {CompanyInvitesPageComponent} from "./pages/user/userCompanies/company-invites-page/company-invites-page.component";
 import {CompanyRequestsPageComponent} from "./pages/user/userCompanies/company-requests-page/company-requests-page.component";
 import {CompanyAdminsPageComponent} from "./pages/user/userCompanies/company-admins-page/company-admins-page.component";
+import {QuizListComponent} from "./pages/quiz-list/quiz-list.component";
 
 const routes: Routes = [
     {path: '', component: MainPage},
@@ -33,6 +34,7 @@ const routes: Routes = [
     {path: 'company-invites', component: CompanyInvitesPageComponent, canActivate: [AuthGuard]},
     {path: 'company-requests', component: CompanyRequestsPageComponent, canActivate: [AuthGuard]},
     {path: 'company-admins', component: CompanyAdminsPageComponent, canActivate: [AuthGuard]},
+    {path: 'company-quiz', component: QuizListComponent, canActivate: [AuthGuard]},
     // {path: '**', component: MainPage},
 
 ];

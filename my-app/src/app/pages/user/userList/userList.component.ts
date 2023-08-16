@@ -3,7 +3,7 @@ import {Store} from '@ngrx/store';
 import {UserState} from '../../../../ngRx/user.reducer';
 import {Observable, Subscription} from 'rxjs';
 import {paginationForUserListEffects} from '../../../../ngRx/healthcheck.effects';
-import {UserForList} from '../../../../ngRx/user.actions';
+import {UserForList} from "../../../types/types";
 
 @Component({
   selector: 'app-user-list-page',

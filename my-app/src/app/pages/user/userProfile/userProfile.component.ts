@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
-import {setUser, User, UserForList, userUnAuthorized} from '../../../../ngRx/user.actions';
+import {setUser, userUnAuthorized} from '../../../../ngRx/user.actions';
 import {Store} from '@ngrx/store';
 import {UserState} from '../../../../ngRx/user.reducer';
 import {
@@ -8,6 +8,7 @@ import {
     getUserByIdEffects,
 } from '../../../../ngRx/healthcheck.effects';
 import {ActivatedRoute, Router} from '@angular/router';
+import {User, UserForList} from "../../../types/types";
 
 @Component({
     selector: 'app-user-profile-page',
