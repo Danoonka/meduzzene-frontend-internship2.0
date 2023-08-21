@@ -5,6 +5,7 @@ import {createQuizEffects} from "../../../ngRx/healthcheck.effects";
 import {Store} from "@ngrx/store";
 import {CompanyState} from "../../../ngRx/user.reducer";
 import {Observable} from "rxjs";
+import {NavigationExtras, Router} from "@angular/router";
 
 
 @Component({
@@ -24,7 +25,8 @@ export class CreateQuizModalComponent {
 
     constructor(
         private formBuilder: FormBuilder,
-        private store: Store<{ company: CompanyState }>
+        private store: Store<{ company: CompanyState }>,
+        private router: Router,
     ) {
         this.company$ = this.store.select((state) => state.company.companyById);
     }
@@ -73,7 +75,6 @@ export class CreateQuizModalComponent {
             if (answers.length < 2) {
                 return null
             }
-
             return {
                 question_text: question.text,
                 question_answers: answers,
@@ -97,18 +98,22 @@ export class CreateQuizModalComponent {
                 createQuizEffects(company.company_id, quizData)
             }
         })
-
-        console.log(quizData)
-
+        this.form.reset();
+        this.questions.forEach((question) => {
+            question.text = '';
+            question.answers = [{text: '', isCorrect: false}];
+        });
         this.closeDialog()
     }
 
 
     showDialog() {
+        this.form.reset();
         let modal_t = document.getElementById('modal_7')
         modal_t?.classList.remove('hhidden')
         modal_t?.classList.add('sshow');
     }
+
 
     closeDialog() {
         let modal_t = document.getElementById('modal_7')

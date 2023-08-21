@@ -21,6 +21,7 @@ export class CompanyListPage implements OnInit, OnDestroy{
   }
 
   ngOnInit() {
+
     this.loadPage(this.currentPage);
   }
 

@@ -1,12 +1,6 @@
-<app-button
-        class="block bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
-        [text]="'Update quiz'"
-        (btnClick)="showDialog()"
-        [isDisabled]="false"
-></app-button>
 <app-modal
-        id="modal_8" class="hhidden">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        id="modal_8">
+    <form [formGroup]="form">
         <app-input
                 [label]="'Quiz name'"
                 name="'quiz_name"
@@ -28,14 +22,23 @@
                             class="bg-transparent hover:bg-[#f039b1] text-[#f039b1] h-[40px] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
                             style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"
                             [text]="'Delete'"
-                            (btnClick)="onDelete(question.question_id)"
+                            (btnClick)="onDelete(question.question_id? question.question_id : 0)"
                             [isDisabled]="false"></app-button>
-                    <app-update-question-modal
-                            [quiz_id]="quiz_id"
-                            [question_id]="question.question_id"></app-update-question-modal>
+                    <app-button
+                            class="block bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                            [text]="'Update question'"
+                            (btnClick)="goToPage('/update-question', quiz_id, question.question_id? question.question_id : 0)"
+                            [isDisabled]="false"
+                    ></app-button>
                 </div>
             </div>
         </ng-container>
+        <app-button
+                class="block bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                [text]="'Add question'"
+                (btnClick)="goToPage('/add-question', quiz_id, 0)"
+                [isDisabled]="false">
+        </app-button>
         <div class="flex m-[20px] justify-around">
             <app-button
                     class="bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"

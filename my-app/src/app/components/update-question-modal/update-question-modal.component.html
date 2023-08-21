@@ -1,13 +1,6 @@
-<app-button
-        class="block h-[40px] bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-[50%] hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
-        [text]="'Edit'"
-        (btnClick)="showDialog()"
-        [isDisabled]="false"
-></app-button>
-
-<app-modal id="modal_9" class="hhidden">
+<app-modal id="modal_9">
     <h2 class="font-bold mb-2 text-center text-lg mt-4 text-[#f039b1]">Update Question</h2>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form">
         <div>
             <app-input
                     [label]="'Question Text'"

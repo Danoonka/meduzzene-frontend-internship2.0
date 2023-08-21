@@ -332,7 +332,7 @@ export const deleteQuizEffects = async (quiz_id: number) => {
 export const getQuizByIdEffects = async (quiz_id: number) => {
     return await getQuizById(quiz_id)
         .then(res => {
-            return res.data
+            return res.data.result
         })
         .catch(function (error) {
             console.log(error)
@@ -370,7 +370,8 @@ export const deleteQuestionEffects = async (quiz_id: number, question_id: number
 export const getQuestionByIdEffects = async (question_id: number) => {
     return await getQuestionByID(question_id)
         .then(res=>{
-            return res.data
+            console.log(res)
+            return res
         })
         .catch(function (error) {
             console.log(error)

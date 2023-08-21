@@ -8,7 +8,7 @@ import {
     getUserByIdEffects,
 } from '../../../../ngRx/healthcheck.effects';
 import {ActivatedRoute, Router} from '@angular/router';
-import {User, UserForList} from "../../../types/types";
+import {User} from "../../../types/types";
 
 @Component({
     selector: 'app-user-profile-page',

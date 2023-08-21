@@ -1,7 +1,8 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectorRef, Component, Input} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Question} from "../../types/types";
 import {getQuestionByIdEffects, updateQuestionEffects} from "../../../ngRx/healthcheck.effects";
+import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
 
 @Component({
     selector: 'app-update-question-modal',
@@ -9,8 +10,8 @@ import {getQuestionByIdEffects, updateQuestionEffects} from "../../../ngRx/healt
     styleUrls: ['../modal/modal.component.css']
 })
 export class UpdateQuestionModalComponent {
-    @Input() quiz_id!: number
-    @Input() question_id!: number
+    quiz_id!: number
+    question_id!: number
     question!: Question | null;
     form!: FormGroup;
     loading = false;
@@ -18,7 +19,10 @@ export class UpdateQuestionModalComponent {
 
 
     constructor(
-        private formBuilder: FormBuilder
+        private changeDetectorRef: ChangeDetectorRef,
+        private formBuilder: FormBuilder,
+        private route: ActivatedRoute,
+        private router: Router
     ) {
     }
 
@@ -30,9 +34,20 @@ export class UpdateQuestionModalComponent {
             question_correct_answer: [0, Validators.required],
         });
 
+        this.route.queryParams.subscribe(params => {
+            if (params['quiz_id']) {
+                this.quiz_id = params['quiz_id'];
+            }
+            if (params['question_id']) {
+                this.question_id = params['question_id'];
+            }
+        });
+        console.log(this.question_id)
         getQuestionByIdEffects(this.question_id).then((res) => {
+
             if (res) {
-                this.question = res;
+                this.question = res.data;
+                console.log(this.question)
                 this.form.patchValue({
                     question_text: this.question?.question_text,
                     question_correct_answer: this.question?.question_correct_answer,
@@ -55,7 +70,7 @@ export class UpdateQuestionModalComponent {
         return this.form.get('question_answers') as FormArray;
     }
 
-    onSubmit(){
+    onSubmit() {
         this.submitted = true;
         if (this.form.invalid) {
             return;
@@ -71,20 +86,25 @@ export class UpdateQuestionModalComponent {
             question_answers: questionAnswers,
             question_correct_answer: questionCorrectAnswer
         }
-        updateQuestionEffects(this.quiz_id, this.question_id, question).then(()=>{
+        updateQuestionEffects(this.quiz_id, this.question_id, question).then(() => {
             this.closeDialog()
         })
     }
 
-    showDialog() {
-        let modal = document.getElementById('modal_9')
-        modal?.classList.remove('hhidden')
-        modal?.classList.add('sshow');
+    goToPage(page: string, queryParam: string, queryValue: number) {
+        const queryParams: NavigationExtras = {
+            queryParams: {
+                [queryParam]: queryValue
+            }
+        };
+
+        this.router.navigate([page], queryParams);
     }
 
+
     closeDialog() {
-        let modal = document.getElementById('modal_9')
-        modal?.classList.remove('sshow')
-        modal?.classList.add('hhidden');
+        this.form.reset();
+        this.goToPage('/update-quiz', 'quiz_id', this.quiz_id)
+        this.changeDetectorRef.detectChanges();
     }
 }

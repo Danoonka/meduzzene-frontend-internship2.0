@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
-import {Observable, Subscription} from "rxjs";
+import {filter, Observable, Subscription} from "rxjs";
 import {CompanyById, QuizList} from "../../types/types";
 import {Store} from "@ngrx/store";
 import {CompanyState} from "../../../ngRx/user.reducer";
 import {deleteQuizEffects} from "../../../ngRx/healthcheck.effects";
 import {getAllCompanyQuiz} from "../../api/api";
+import {NavigationEnd, NavigationExtras, Router} from "@angular/router";
 
 @Component({
     selector: 'app-quiz-list',
@@ -16,15 +17,32 @@ export class QuizListComponent {
     quizzes: QuizList[] | [];
     company$: Observable<CompanyById | null>;
     private companySubscription!: Subscription;
+    private navigationSubscription!: Subscription;
 
 
     constructor(
         private companyStore: Store<{ company: CompanyState }>,
+        private router: Router,
     ) {
         this.company$ = this.companyStore.select((state) => state.company.companyById);
         this.quizzes = []
+        this.navigationSubscription = this.router.events.pipe(
+            filter(event => event instanceof NavigationEnd)
+        ).subscribe(() => {
+            this.refreshQuizzes();
+        });
     }
 
+
+    private refreshQuizzes() {
+        this.companySubscription = this.company$.subscribe((company) => {
+            if (company) {
+                getAllCompanyQuiz(company.company_id).then(res => {
+                    this.quizzes = res.data.result;
+                });
+            }
+        });
+    }
 
     ngOnInit() {
         this.companySubscription = this.company$.subscribe((company) => {
@@ -46,6 +64,17 @@ export class QuizListComponent {
                 }
             });
         })
-
     }
+
+    goToPage(page: string, queryParam: string, queryValue: number) {
+        const queryParams: NavigationExtras = {
+            queryParams: {
+                [queryParam]: queryValue
+            }
+        };
+
+        this.router.navigate([page], queryParams);
+    }
+
+
 }

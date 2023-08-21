@@ -1,8 +1,9 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectorRef, Component,} from '@angular/core';
 import {Question, Quiz, QuizInfo} from "../../types/types";
-import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {getQuizById} from "../../api/api";
 import {deleteQuestionEffects, updateQuizEffects} from "../../../ngRx/healthcheck.effects";
+import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
 
 
 @Component({
@@ -11,7 +12,7 @@ import {deleteQuestionEffects, updateQuizEffects} from "../../../ngRx/healthchec
     styleUrls: ['../modal/modal.component.css']
 })
 export class UpdateQuizModalComponent {
-    @Input() quiz_id!: number
+    quiz_id!: number
     quiz!: Quiz | null
     form!: FormGroup;
     loading = false;
@@ -21,6 +22,9 @@ export class UpdateQuizModalComponent {
 
     constructor(
         private formBuilder: FormBuilder,
+        private changeDetectorRef: ChangeDetectorRef,
+        private route: ActivatedRoute,
+        private router: Router
     ) {
         this.questions = []
     }
@@ -32,16 +36,23 @@ export class UpdateQuizModalComponent {
             quiz_frequency: [0, Validators.required],
         });
 
+        this.route.queryParams.subscribe(params => {
+            if (params['quiz_id']) {
+                this.quiz_id = params['quiz_id'];
+            }
+        });
+
         getQuizById(this.quiz_id).then((res) => {
-            this.quiz = res.data;
+            this.quiz = res.data.result;
+            console.log(this.quiz)
             if (this.quiz) {
-                this.questions = this.quiz.question_list
+                this.questions = this.quiz.question_list;
                 this.form.patchValue({
                     quiz_name: this.quiz.quiz_name,
                     quiz_frequency: this.quiz.quiz_frequency
-                })
+                });
             }
-        });
+        })
     }
 
     get f() {
@@ -57,17 +68,19 @@ export class UpdateQuizModalComponent {
         };
 
         updateQuizEffects(this.quiz_id, quizData)
+        this.router.navigate(['/company-quiz']);
     }
 
     onDelete(question_id: number) {
-        if (this.questions.length <= 2){
+        if (this.questions.length <= 2) {
             return
         }
         deleteQuestionEffects(this.quiz_id, question_id).then(() => {
             getQuizById(this.quiz_id).then((res) => {
-                this.quiz = res.data;
+                this.quiz = res.data.result;
                 if (this.quiz) {
                     this.questions = this.quiz.question_list
+                    this.changeDetectorRef.detectChanges();
                     this.form.patchValue({
                         quiz_name: this.quiz.quiz_name,
                         quiz_frequency: this.quiz.quiz_frequency
@@ -77,15 +90,20 @@ export class UpdateQuizModalComponent {
         })
     }
 
-    showDialog() {
-        let modal_t = document.getElementById('modal_8')
-        modal_t?.classList.remove('hhidden')
-        modal_t?.classList.add('sshow');
+    goToPage(page: string, quizId: number, questionId: number) {
+        const queryParams: NavigationExtras = {
+            queryParams: {
+                quiz_id: quizId,
+                question_id: questionId,
+            },
+        };
+
+        this.router.navigate([page], queryParams);
     }
 
     closeDialog() {
-        let modal_t = document.getElementById('modal_8')
-        modal_t?.classList.remove('sshow')
-        modal_t?.classList.add('hhidden');
+        this.form.reset();
+        this.goToPage('/update-quiz', this.quiz_id, 0)
+        this.changeDetectorRef.detectChanges();
     }
 }

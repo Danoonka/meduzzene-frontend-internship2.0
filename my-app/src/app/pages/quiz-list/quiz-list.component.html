@@ -14,9 +14,13 @@
                         (btnClick)="onDelete(quiz.quiz_id)"
                         [isDisabled]="false"
                 ></app-button>
-                <app-update-quiz-modal
-                        [quiz_id]="quiz.quiz_id"
-                ></app-update-quiz-modal>
+                <app-button
+                        class="block bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                        [text]="'Update quiz'"
+                        (btnClick)="goToPage('/update-quiz', 'quiz_id', quiz.quiz_id)"
+                        [isDisabled]="false"
+                ></app-button>
+
             </div>
         </div>
     </ng-container>
