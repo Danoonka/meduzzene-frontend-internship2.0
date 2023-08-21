@@ -4,10 +4,11 @@ import {delay, map, Observable, of} from "rxjs";
 import {checkAuthEffects, logInUserEffects} from "../../../ngRx/healthcheck.effects";
 import {AuthService} from "@auth0/auth0-angular";
 import {Store} from "@ngrx/store";
-import {User, userAuthorized} from "../../../ngRx/user.actions";
+import {userAuthorized} from "../../../ngRx/user.actions";
 import {UserState} from "../../../ngRx/user.reducer";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import {User} from "../../types/types";
 
 @Component({
   selector: 'app-authorisation-page',

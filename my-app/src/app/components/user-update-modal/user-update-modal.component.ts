@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { User } from "../../../ngRx/user.actions";
 import { Store } from "@ngrx/store";
 import { UserState } from "../../../ngRx/user.reducer";
 import { Observable } from "rxjs";
 import {updateUserInfoEffects} from "../../../ngRx/healthcheck.effects";
+import {User} from "../../types/types";
 
 @Component({
   selector: 'app-user-update-modal',

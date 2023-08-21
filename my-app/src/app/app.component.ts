@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {environment} from '../environments/environments';
 import {Observable} from "rxjs";
-import {User, userAuthorized} from "../ngRx/user.actions";
+import {userAuthorized} from "../ngRx/user.actions";
 import {Store} from "@ngrx/store";
 import {UserState} from "../ngRx/user.reducer";
 import {checkAuthEffects} from "../ngRx/healthcheck.effects";
 import {Router} from "@angular/router";
+import {User} from "./types/types";
 
 @Component({
   selector: 'app-root',

@@ -40,6 +40,15 @@ import { CompanyInvitesPageComponent } from './pages/user/userCompanies/company-
 import { CompanyRequestsPageComponent } from './pages/user/userCompanies/company-requests-page/company-requests-page.component';
 import { SendInviteModalComponent } from './components/send-invite-modal/send-invite-modal.component';
 import { CompanyAdminsPageComponent } from './pages/user/userCompanies/company-admins-page/company-admins-page.component';
+import { CreateQuizModalComponent } from './components/create-quiz-modal/create-quiz-modal.component';
+import { QuestionFieldComponent } from './components/question-field/question-field.component';
+import { AnswerComponentComponent } from './components/answer-component/answer-component.component';
+import { QuizListComponent } from './pages/quiz-list/quiz-list.component';
+import { QuizItemComponent } from './components/quiz-item/quiz-item.component';
+import { UpdateQuizModalComponent } from './components/update-quiz-modal/update-quiz-modal.component';
+import { QuestionLinesComponent } from './components/question-lines/question-lines.component';
+import { UpdateQuestionModalComponent } from './components/update-question-modal/update-question-modal.component';
+import { AddQuestionModalComponent } from './components/add-question-modal/add-question-modal.component';
 
 @NgModule({
     declarations: [
@@ -71,9 +80,19 @@ import { CompanyAdminsPageComponent } from './pages/user/userCompanies/company-a
         CompanyInvitesPageComponent,
         CompanyRequestsPageComponent,
         SendInviteModalComponent,
-        CompanyAdminsPageComponent
+        CompanyAdminsPageComponent,
+        CreateQuizModalComponent,
+        QuestionFieldComponent,
+        AnswerComponentComponent,
+        QuizListComponent,
+        QuizItemComponent,
+        UpdateQuizModalComponent,
+        QuestionLinesComponent,
+        UpdateQuestionModalComponent,
+        AddQuestionModalComponent
     ],
     imports: [
+        ReactiveFormsModule,
         BrowserModule,
         AppRoutingModule,
         StoreModule.forRoot({

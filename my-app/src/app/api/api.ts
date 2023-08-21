@@ -1,6 +1,6 @@
 import axios, {AxiosInstance, AxiosRequestConfig} from "axios";
 import {environment} from "src/environments/environments";
-import {CompanyToCreate, userToEdit, UserToSignUp} from "../../ngRx/user.actions";
+import {CompanyToCreate, Question, Quiz, QuizInfo, userToEdit, UserToSignUp} from "../types/types";
 
 
 export const instance: AxiosInstance = axios.create({
@@ -141,7 +141,7 @@ export const createAdmin = (action_id: number) => {
     return instance.post(`/actions/add-admin-role/${action_id}`)
 }
 
-export const deleteAdmin = (action_id: number)=>{
+export const deleteAdmin = (action_id: number) => {
     return instance.put(`/actions/delete_admin/${action_id}`)
 }
 
@@ -149,4 +149,39 @@ export const getAllAdmins = (company_id: number) => {
     return instance.get(`/actions/get-all-admins/company/${company_id}`)
 }
 
+export const createQuiz = (company_id: number, quiz: Quiz) => {
+    return instance.post(`/quiz/create-quiz/company/${company_id}/`, {...quiz})
+}
 
+export const updateQuiz = (quiz_id: number, quiz: QuizInfo) => {
+    return instance.put(`/quiz/update-quiz/${quiz_id}/`, quiz)
+}
+
+
+export const deleteQuiz = (quiz_id: number) => {
+    return instance.delete(`/quiz/delete-quiz/${quiz_id}`)
+}
+
+export const getQuizById = (quiz_id: number) => {
+    return instance.get(`/quiz/quiz/${quiz_id}`)
+}
+
+export const getAllCompanyQuiz = (company_id: number) => {
+    return instance.get(`/quiz/all-company-quiz/company/${company_id}`)
+}
+
+export const addQuestion = (quiz_id: number, question: Question) => {
+    return instance.post(`/quiz/add-new-question/${quiz_id}`, question)
+}
+
+export const updateQuestion = (quiz_id: number, question_id: number, question: Question) => {
+    return instance.put(`/quiz/update-question/quiz/${quiz_id}/question/${question_id}/`, question)
+}
+
+export const deleteQuestion = (quiz_id: number, question_id: number) => {
+    return instance.delete(`/quiz/delete-question/quiz/${quiz_id}/question/${question_id}`)
+}
+
+export const getQuestionByID = (question_id: number) => {
+    return instance.get(`/quiz/question/${question_id}`)
+}

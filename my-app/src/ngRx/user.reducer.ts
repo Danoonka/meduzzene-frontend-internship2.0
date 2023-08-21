@@ -1,9 +1,5 @@
 import {createReducer, on} from '@ngrx/store';
 import {
-    CompanyById,
-    CompanyForList,
-    CompanyToCreate,
-    PaginationInfoState,
     setCompany,
     setCompanyById,
     setCompanyList,
@@ -12,9 +8,7 @@ import {
     setUser,
     setUserById,
     setUserList,
-    User,
     userAuthorized,
-    UserForList,
     userUnAuthorized,
     setInvitesListForUser,
     setInvitesListForCompany,
@@ -22,6 +16,7 @@ import {
     setRequestsListForCompany,
     setUsersListForCompany, setCompaniesListForUser, setAdminsListForCompany
 } from './user.actions';
+import {CompanyById, CompanyForList, CompanyToCreate, PaginationInfoState, User, UserForList} from "../app/types/types";
 
 export interface UserState {
     isAuthorized: boolean;

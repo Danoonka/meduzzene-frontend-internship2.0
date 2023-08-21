@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {Observable, Subscription} from "rxjs";
-import {CompanyById, UserForList} from "../../../../../ngRx/user.actions";
 import {Store} from "@ngrx/store";
 import {ActionState, CompanyState} from "../../../../../ngRx/user.reducer";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -9,6 +8,7 @@ import {
     getInvitesListForCompanyEffects, getRequestListForUserEffects,
     getUsersListForCompanyEffects
 } from "../../../../../ngRx/healthcheck.effects";
+import {CompanyById, UserForList} from "../../../../types/types";
 
 @Component({
     selector: 'app-company-invites-page',

@@ -1,0 +1,59 @@
+<app-modal
+        id="modal_8">
+    <form [formGroup]="form">
+        <app-input
+                [label]="'Quiz name'"
+                name="'quiz_name"
+                [control]="form.get('quiz_name')"
+                [type]='"text"'>
+        </app-input>
+        <app-input
+                [label]="'Frequency'"
+                name="'quiz_frequency"
+                [control]="form.get('quiz_frequency')"
+                [type]="'number'"
+                [min]="1">
+        </app-input>
+        <ng-container *ngFor="let question of questions">
+            <div class="py-2 px-4 justify-between font-semibold mx-auto my-[20px] flex border-[#e305ad] border-[1px] w-[90%] min-h-[50px] rounded ">
+                <app-question-lines [question]='question'></app-question-lines>
+                <div class="flex justify-between">
+                    <app-button
+                            class="bg-transparent hover:bg-[#f039b1] text-[#f039b1] h-[40px] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                            style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"
+                            [text]="'Delete'"
+                            (btnClick)="onDelete(question.question_id? question.question_id : 0)"
+                            [isDisabled]="false"></app-button>
+                    <app-button
+                            class="block bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                            [text]="'Update question'"
+                            (btnClick)="goToPage('/update-question', quiz_id, question.question_id? question.question_id : 0)"
+                            [isDisabled]="false"
+                    ></app-button>
+                </div>
+            </div>
+        </ng-container>
+        <app-button
+                class="block bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                [text]="'Add question'"
+                (btnClick)="goToPage('/add-question', quiz_id, 0)"
+                [isDisabled]="false">
+        </app-button>
+        <div class="flex m-[20px] justify-around">
+            <app-button
+                    class="bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                    style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"
+                    [isDisabled]="loading"
+                    (btnClick)="onSubmit()"
+                    [text]="'Save'">
+            </app-button>
+            <app-button
+                    class="bg-transparent hover:bg-[#f039b1] mt-[-5px] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                    [text]="'Close'"
+                    (btnClick)="closeDialog()"
+                    [isDisabled]="false"
+            ></app-button>
+        </div>
+    </form>
+</app-modal>
+

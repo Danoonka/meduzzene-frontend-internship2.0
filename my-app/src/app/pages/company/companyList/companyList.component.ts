@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core'
 import {Observable, Subscription} from "rxjs";
-import {CompanyForList} from "../../../../ngRx/user.actions";
 import {Store} from "@ngrx/store";
 import {CompanyState} from "../../../../ngRx/user.reducer";
 import {paginationForCompanyList} from "../../../../ngRx/healthcheck.effects";
+import {CompanyForList} from "../../../types/types";
 
 @Component({
   selector: 'app-company-list-page',
@@ -21,6 +21,7 @@ export class CompanyListPage implements OnInit, OnDestroy{
   }
 
   ngOnInit() {
+
     this.loadPage(this.currentPage);
   }
 

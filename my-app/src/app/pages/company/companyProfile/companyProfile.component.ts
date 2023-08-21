@@ -1,15 +1,14 @@
 import {Component, OnDestroy} from '@angular/core';
 import {Observable, Subscription} from "rxjs";
-import {CompanyById, CompanyForList, User, UserForList} from "../../../../ngRx/user.actions";
 import {ActionState, CompanyState, UserState} from "../../../../ngRx/user.reducer";
 import {Store} from "@ngrx/store";
 import {ActivatedRoute, Router} from "@angular/router";
 import {
-    declineActionEffects,
     deleteCompanyEffects,
     getCompanyByIdEffects,
     getUsersListForCompanyEffects, sendRequestEffects
 } from "../../../../ngRx/healthcheck.effects";
+import {CompanyById, User, UserForList} from "../../../types/types";
 
 @Component({
     selector: 'app-company-profile-page',
