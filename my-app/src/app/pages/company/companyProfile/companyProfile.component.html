@@ -21,11 +21,6 @@
                 [text]="'Admins'"
                 (btnClick)="goToPage('/company-admins')"
                 [isDisabled]="false"></app-button>
-        <app-button
-                class="bg-transparent hover:bg-[#f039b1] mt-[-5px] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
-                [text]="'Quiz'"
-                (btnClick)="goToPage('/company-quiz')"
-                [isDisabled]="false"></app-button>
     </div>
 </ng-container>
 <div>
@@ -41,7 +36,7 @@
         </div>
         <ng-container *ngIf="{ members: members$ | async, user: user$ | async } as data">
             <ng-container
-                    *ngIf="data.user && data.members && !isUserMember(data.user, data.members) && !isCurrentUserOwner">
+                    *ngIf="data.user && data.members && !isCurrentUserMember && !isCurrentUserOwner">
                 <div class="flex text-center w-[20%] justify-between mx-auto my-[50px]">
                     <app-button
                             class="block mx-auto bg-transparent hover:bg-[#f039b1] mt-[-5px] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
@@ -52,17 +47,25 @@
                 </div>
             </ng-container>
         </ng-container>
-        <ng-container *ngIf="isCurrentUserOwner">
+        <ng-container *ngIf="isCurrentUserMember || isCurrentUserOwner">
             <div class="flex w-[50%] justify-between mx-auto my-[50px]">
+                <ng-container  *ngIf="isCurrentUserOwner">
+                    <app-button
+                            class="bg-transparent hover:bg-[#f039b1] mt-[-5px] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                            [text]="'Delete company'"
+                            (btnClick)="onDeleteCompany()"
+                            [isDisabled]="false"
+                    ></app-button>
+                    <app-company-update-modal></app-company-update-modal>
+                    <app-send-invite-modal></app-send-invite-modal>
+                    <app-create-quiz-modal></app-create-quiz-modal>
+                </ng-container>
+
                 <app-button
                         class="bg-transparent hover:bg-[#f039b1] mt-[-5px] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
-                        [text]="'Delete company'"
-                        (btnClick)="onDeleteCompany()"
-                        [isDisabled]="false"
-                ></app-button>
-                <app-company-update-modal></app-company-update-modal>
-                <app-send-invite-modal></app-send-invite-modal>
-                <app-create-quiz-modal></app-create-quiz-modal>
+                        [text]="'Quiz'"
+                        (btnClick)="goToPage('/company-quiz', isCurrentUserMember, isCurrentUserOwner)"
+                        [isDisabled]="false"></app-button>
             </div>
         </ng-container>
     </ng-container>

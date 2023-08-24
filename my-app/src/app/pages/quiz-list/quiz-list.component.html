@@ -7,21 +7,30 @@
                     [quiz_name]="quiz.quiz_name"
             >
             </app-quiz-item>
-            <div class="flex w-[300px] justify-around gap-[10px] mt-[20px]">
+            <ng-container *ngIf="isMember">
                 <app-button
                         class="block bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
-                        [text]="'Delete quiz'"
-                        (btnClick)="onDelete(quiz.quiz_id)"
+                        [text]="'Take quiz'"
+                        (btnClick)="goToPage('/take-quiz', 'quiz_id', quiz.quiz_id)"
                         [isDisabled]="false"
                 ></app-button>
-                <app-button
-                        class="block bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
-                        [text]="'Update quiz'"
-                        (btnClick)="goToPage('/update-quiz', 'quiz_id', quiz.quiz_id)"
-                        [isDisabled]="false"
-                ></app-button>
-
-            </div>
+            </ng-container>
+            <ng-container *ngIf="isOwner">
+                <div class="flex w-[300px] justify-around gap-[10px] mt-[20px]">
+                    <app-button
+                            class="block bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                            [text]="'Delete quiz'"
+                            (btnClick)="onDelete(quiz.quiz_id)"
+                            [isDisabled]="false"
+                    ></app-button>
+                    <app-button
+                            class="block bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+                            [text]="'Update quiz'"
+                            (btnClick)="goToPage('/update-quiz', 'quiz_id', quiz.quiz_id)"
+                            [isDisabled]="false"
+                    ></app-button>
+                </div>
+            </ng-container>
         </div>
     </ng-container>
 </div>

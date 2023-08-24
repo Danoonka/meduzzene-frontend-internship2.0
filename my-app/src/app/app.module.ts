@@ -49,6 +49,7 @@ import { UpdateQuizModalComponent } from './components/update-quiz-modal/update-
 import { QuestionLinesComponent } from './components/question-lines/question-lines.component';
 import { UpdateQuestionModalComponent } from './components/update-question-modal/update-question-modal.component';
 import { AddQuestionModalComponent } from './components/add-question-modal/add-question-modal.component';
+import { TakeQuizModalComponent } from './components/take-quiz-modal/take-quiz-modal.component';
 
 @NgModule({
     declarations: [
@@ -89,7 +90,8 @@ import { AddQuestionModalComponent } from './components/add-question-modal/add-q
         UpdateQuizModalComponent,
         QuestionLinesComponent,
         UpdateQuestionModalComponent,
-        AddQuestionModalComponent
+        AddQuestionModalComponent,
+        TakeQuizModalComponent
     ],
     imports: [
         ReactiveFormsModule,
