@@ -53,13 +53,10 @@ export class QuizListComponent {
                 this.isMember = params['isMember'];
             }
             if (params['isOwner'] === 'true') {
-
-                console.log( typeof (params['isOwner'] ))
                 this.isOwner = params['isOwner'];
             }
         });
-
-        console.log(this.isMember)
+        
         this.companySubscription = this.company$.subscribe((company) => {
             if (company) {
                 getAllCompanyQuiz(company.company_id).then(res => {

@@ -279,10 +279,8 @@ export const getCompaniesListForUserEffects = async (user_id: number, store: Sto
 }
 
 export const getUsersListForCompanyEffects = async (company_id: number, store: Store) => {
-    console.log(company_id)
     return await getAllCompanyMembers(company_id)
         .then(res => {
-            console.log(res)
             store.dispatch(setUsersListForCompany({usersForCompany: res.data.result}))
             return res.data
         })
@@ -372,7 +370,6 @@ export const deleteQuestionEffects = async (quiz_id: number, question_id: number
 export const getQuestionByIdEffects = async (question_id: number) => {
     return await getQuestionByID(question_id)
         .then(res => {
-            console.log(res)
             return res
         })
         .catch(function (error) {
@@ -384,7 +381,6 @@ export const takeQuizEffects = async (company_id: number, user_id: number, quiz_
     console.log(answers)
     return await takeQuiz(company_id, user_id, quiz_id, answers)
         .then(res => {
-            console.log(res.data)
             return res.data
         })
         .catch(function (error) {
