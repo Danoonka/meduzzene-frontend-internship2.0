@@ -34,3 +34,28 @@
   background-color: #000;
   opacity: 0.95;
 }
+
+.chosen{
+  display: block;
+  color: white;
+  background-color: #f039b1;
+  font-weight: normal;
+  padding: 2px 4px;
+  border: 1px solid #e305ad;
+}
+
+.default {
+  display: block;
+  background: transparent;
+  color: #f039b1;
+  font-weight: normal;
+  padding: 2px 4px;
+  border: 1px solid #e305ad;
+  border-radius: 10px;
+}
+
+.default:hover{
+  background-color: #f039b1;
+  color: white;
+  border: transparent;
+}

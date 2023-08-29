@@ -1,0 +1,24 @@
+<app-modal>
+    <ng-container *ngIf="quiz">
+        <h2 class="font-bold mb-2 text-center text-lg mt-4 text-[#f039b1]">{{quiz.quiz_name}}</h2>
+        <ng-container *ngFor="let question of quiz.question_list; let j = index;">
+            <p class="font-bold mb-2 text-center text-lg mt-4 text-[#f039b1]">{{question.question_text}}</p>
+            <ng-container *ngFor="let answer of question.question_answers; let i = index; ">
+                <app-button
+                        [id]="'question-' + (question.question_id ? question.question_id : 0) + '-answer-' + i"
+                        class="default"
+                        [text]="answer"
+                        (btnClick)="onAnswerClick(question.question_id ? question.question_id : 0 , i)"
+                        [isDisabled]="isButtonDisabled(question.question_id ? question.question_id : 0)"
+                ></app-button>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+    <app-button
+            class="bg-transparent hover:bg-[#f039b1] text-[#f039b1] font-semibold hover:text-[white] py-2 px-4 border border-[#e305ad] hover:border-transparent rounded"
+            style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"
+            [text]="'Submit'"
+            (btnClick)="onSubmit()"
+            [isDisabled]="false"
+    ></app-button>
+</app-modal>

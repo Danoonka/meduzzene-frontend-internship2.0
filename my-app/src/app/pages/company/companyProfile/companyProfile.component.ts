@@ -2,7 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {Observable, Subscription} from "rxjs";
 import {ActionState, CompanyState, UserState} from "../../../../ngRx/user.reducer";
 import {Store} from "@ngrx/store";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
 import {
     deleteCompanyEffects,
     getCompanyByIdEffects,
@@ -23,6 +23,7 @@ export class CompanyProfilePage implements OnDestroy {
     user$: Observable<User | null>;
     private userSubscription!: Subscription;
     isCurrentUserOwner: boolean = false;
+    isCurrentUserMember: boolean = false;
 
 
     constructor(
@@ -38,17 +39,25 @@ export class CompanyProfilePage implements OnDestroy {
     }
 
     ngOnInit() {
-        getUsersListForCompanyEffects(this.companyId, this.actionStore)
         this.companySubscription = this.route.queryParams.subscribe((params) => {
             this.companyId = params['company_id'];
             getCompanyByIdEffects(this.companyId, this.store);
+            getUsersListForCompanyEffects(this.companyId, this.actionStore)
         });
+
+        this.members$.subscribe((members) => {
+            this.user$.subscribe((user) => {
+                console.log(members)
+                if (user) {
+                    this.isCurrentUserMember = members.some(member => member.user_id === user.user_id);
+                }
+            })
+        })
+
 
         this.userStore.select((state) => state.user.user?.user_id).subscribe((currentUserId) => {
             this.company$.subscribe((company) => {
-                console.log(currentUserId)
                 if (company) {
-                    console.log(company)
                     this.isCurrentUserOwner = company.owner_id === currentUserId;
                 }
             });
@@ -82,11 +91,17 @@ export class CompanyProfilePage implements OnDestroy {
         }
     }
 
-    isUserMember(user: User, members: UserForList[]): boolean {
-        return members.some(member => member.user_id === user.user_id);
-    }
-
-    goToPage(page: string) {
-        this.router.navigate([page]);
+    goToPage(page: string, isMember?: boolean, isOwner?: boolean) {
+        if (isMember || isOwner) {
+            const queryParams: NavigationExtras = {
+                queryParams: {
+                    isMember: isMember,
+                    isOwner: isOwner,
+                },
+            };
+            this.router.navigate([page], queryParams)
+        } else {
+            this.router.navigate([page]);
+        }
     }
 }

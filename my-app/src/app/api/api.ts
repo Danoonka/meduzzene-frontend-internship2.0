@@ -185,3 +185,8 @@ export const deleteQuestion = (quiz_id: number, question_id: number) => {
 export const getQuestionByID = (question_id: number) => {
     return instance.get(`/quiz/question/${question_id}`)
 }
+
+export const takeQuiz = (company_id: number, user_id: number, quiz_id: number, answers: { answers: { [key: string]: string } }) => {
+    console.log(answers)
+    return instance.post(`/quiztake_quiz/${quiz_id}/user/${user_id}/company/${company_id}/`, {...answers})
+}

@@ -30,7 +30,7 @@ import {
     getAllAdmins,
     createQuiz,
     updateQuiz,
-    deleteQuiz, getAllCompanyQuiz, addQuestion, updateQuestion, deleteQuestion, getQuizById, getQuestionByID
+    deleteQuiz, getAllCompanyQuiz, addQuestion, updateQuestion, deleteQuestion, getQuizById, getQuestionByID, takeQuiz
 } from "src/app/api/api"
 import {Store} from '@ngrx/store';
 import {
@@ -369,9 +369,19 @@ export const deleteQuestionEffects = async (quiz_id: number, question_id: number
 
 export const getQuestionByIdEffects = async (question_id: number) => {
     return await getQuestionByID(question_id)
-        .then(res=>{
-            console.log(res)
+        .then(res => {
             return res
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
+}
+
+export const takeQuizEffects = async (company_id: number, user_id: number, quiz_id: number, answers: { answers: { [key: string]: string } }) => {
+    console.log(answers)
+    return await takeQuiz(company_id, user_id, quiz_id, answers)
+        .then(res => {
+            return res.data
         })
         .catch(function (error) {
             console.log(error)
